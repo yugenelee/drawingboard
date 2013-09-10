@@ -3,6 +3,7 @@ angular.module 'config', []
 angular.module 'common', [
   'ui.route'
   'config'
+  'ngRoute'
   'ngMobile'
   'ngCookies'
   'restangular'
