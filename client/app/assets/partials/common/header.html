@@ -1,6 +1,6 @@
 <div id="top-bar">
   <div id="top-nav">
-    <a href="index.php"><img src="styles/img/logo.png"></a>
+    <a href="/"><img src="styles/img/logo.png"></a>
     <div class="top-nav-bar">
       <ul class="nav nav-pills pull-left">
         <li><a href="#">Browse <img src="styles/img/b-icon.png"></a></li>
@@ -9,9 +9,9 @@
         <li class="disabled"><a href="#">&nbsp;</a></li>
       </ul>
       <ul class="nav nav-pills pull-left">
-        <li><a href="#Login" data-toggle="modal">Login</a></li>
-        <li><a href="#Register" data-toggle="modal">Signup</a></li>
-        <li class="disabled"><a href="#">&nbsp;</a></li>
+        <li><a href ng-click="openLoginDialog()">Login</a></li>
+        <li><a href ng-click="openRegisterDialog()">Signup</a></li>
+        <li class="disabled"><a href>&nbsp;</a></li>
       </ul>
       <button class="btn btn-primary pull-right" type="button">Start Listing</button></a></li>
     </div>
