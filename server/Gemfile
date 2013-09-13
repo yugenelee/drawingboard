@@ -1,0 +1,35 @@
+source 'https://rubygems.org'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.0'
+
+gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
+gem 'mongoid_taggable_with_context'
+gem 'mongoid_search', git: 'git://github.com/mauriciozaffari/mongoid_search.git'
+gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia' # before first release
+gem 'will_paginate_mongoid'
+
+gem 'grape'
+gem 'grape-swagger'
+gem 'thin'
+gem 'rack-cors'   # check application.rb
+gem 'mongoid-erd', git: 'git://github.com/sagittaros/mongoid-erd-gem.git'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]

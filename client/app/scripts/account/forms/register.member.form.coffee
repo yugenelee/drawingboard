@@ -1,9 +1,9 @@
-angular.module('account').directive 'registerVendorForm', [
+angular.module('account').directive 'registerMemberForm', [
   ->
     restrict: 'EA'
     replace: true
     scope: {}
-    templateUrl: 'forms/account/register.vendor.html'
+    templateUrl: 'forms/account/register.member.form.html'
     controller: [
       '$scope'
       '$rootScope'
@@ -14,17 +14,16 @@ angular.module('account').directive 'registerVendorForm', [
         $scope.hasError = (input) ->
           !input.$valid && (input.$dirty || $scope.submitted)
 
-        $scope.loginAsMember = ->
+        $scope.submitForm = ->
           $scope.submitted = true
           if $scope.form.$valid
             $rootScope.clear_notifications()
-            Auth.authenticate('Member', $scope.user.email, 'local', $scope.user.password)
-
-        $scope.loginAsVendor = ->
-          $scope.submitted = true
-          if $scope.form.$valid
-            $rootScope.clear_notifications()
-            Auth.authenticate('Vendor', $scope.user.email, 'local', $scope.user.password)
+            additional_fields = {
+              first_name: $scope.user.first_name,
+              last_name: $scope.user.last_name,
+              photo_url: 'styles/img/profile.jpg'
+            }
+            Auth.register('Member', $scope.user.email, 'local', $scope.user.email, $scope.user.password, additional_fields)
 
         init = ->
           $scope.submitted = false

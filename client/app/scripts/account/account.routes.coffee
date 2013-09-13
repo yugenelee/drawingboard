@@ -9,7 +9,7 @@ angular.module('account').config [
     .omit_controller()
     .when('login')
     .when('register.member')
-    .when('register.merchant')
+    .when('register.vendor')
     .when('forgot_password')
     .when('reset_password/:userId/:token')
     .when('account.email_confirmation/:userId/:token', omitView: true)

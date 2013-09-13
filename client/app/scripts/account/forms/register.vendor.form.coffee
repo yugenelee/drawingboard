@@ -1,9 +1,9 @@
-angular.module('account').directive 'loginForm', [
+angular.module('account').directive 'registerVendorForm', [
   ->
     restrict: 'EA'
     replace: true
     scope: {}
-    templateUrl: 'forms/account/login.html'
+    templateUrl: 'forms/account/register.vendor.form.html'
     controller: [
       '$scope'
       '$rootScope'

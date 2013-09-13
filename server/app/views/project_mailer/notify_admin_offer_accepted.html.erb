@@ -1,0 +1,11 @@
+<p>Dear Admin,</p>
+
+<p>
+  <a href="<%= @siteUrl %>/#/freelancers.show/<%= @freelancer.id %>"><%= @freelancer.first_name %> <%= @freelancer.last_name%></a>
+  has accepted an offer from <%= @employer.first_name %> <%= @employer.last_name %>
+  for project: <a href="<%= @siteUrl %>/#/projects.show/<%= @project.id %>">"<%= @project.title%>"</a>
+</p>
+
+
+<p>Cheers</p>
+<p>DrawingBoard Support Team</p>
