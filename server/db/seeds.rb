@@ -8,7 +8,7 @@ categories = {
   transport: 'Transport',
   decor: 'Decor',
   flowers: 'Flowers',
-  invitations_and_stationery: 'Invitation & Stationery',
+  invitations_and_stationery: 'Invitations & Stationery',
   fashion_and_accessories: 'Fashion & Accessories',
   hair_and_beauty: 'Hair & Beauty',
   novelty_services: 'Novelty services',

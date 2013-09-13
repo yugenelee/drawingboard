@@ -2,7 +2,7 @@
   <div class="row">
     <div class="span12">
       <div class="row">
-        <div ng-include src="'partials/common/sidebar.html'"></div>
+        <sidebar></sidebar>
         <div ng-include src="'partials/common/welcome.html'"></div>
       </div>
     </div>
@@ -13,65 +13,7 @@
   <div id="event-sup" class="row-fluid">
     <div class="span12 text-center">
       <h3>Start off by choosing your <span>event suppliers</span> first!</h3>
-      <div class="row-fluid">
-        <div class="span3">
-          <img src="styles/img/events/venues.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/catering.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/photography.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/videography.jpg" class="img-polaroid">
-        </div>
-      </div>
-      <div class="span12"></div>
-      <div class="row-fluid">
-        <div class="span3">
-          <img src="styles/img/events/entertainment.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/cakes.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/transport.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/decor.jpg" class="img-polaroid">
-        </div>
-      </div>
-      <div class="span12"></div>
-      <div class="row-fluid">
-        <div class="span3">
-          <img src="styles/img/events/flowers.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/invitations.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/hair-beauty.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/fashion.jpg" class="img-polaroid">
-        </div>
-      </div>
-      <div class="span12"></div>
-      <div class="row-fluid">
-        <div class="span3">
-
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/novelty.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-          <img src="styles/img/events/supplies.jpg" class="img-polaroid">
-        </div>
-        <div class="span3">
-
-        </div>
-      </div>
+      <div service-categories></div>
     </div>
   </div>
 </div>

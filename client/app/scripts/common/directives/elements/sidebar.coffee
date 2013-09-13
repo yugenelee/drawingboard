@@ -6,12 +6,10 @@ angular.module('common').directive 'sidebar', [
 
     controller: [
       '$scope'
-      ($scope) ->
-        $scope.categories =
-          venues: 'Venues',
-          catering: 'Catering',
-          photography: 'Photography',
-          videography: 'Videography'
+      'Service'
+      ($scope, Service) ->
+        $scope.services = Service.all
+          order: 'created_at ASC'
     ]
 
 ]
