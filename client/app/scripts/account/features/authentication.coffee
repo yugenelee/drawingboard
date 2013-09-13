@@ -2,7 +2,8 @@ angular.module('account').run [
   '$rootScope'
   'Auth'
   '$q'
-  ($rootScope, Auth, $q) ->
+  'SiteName'
+  ($rootScope, Auth, $q, SiteName) ->
 
     $rootScope.logout = ->
       Auth.logout()
@@ -41,7 +42,7 @@ angular.module('account').run [
     $rootScope.$on 'authenticate:success', (event, response) ->
       $rootScope.attemptLogin {
         successHandler: (user) ->
-          success_msg = if response.register then 'Welcome to Creatives@Work!' else 'You are logged in'
+          success_msg = if response.register then "Welcome to #{SiteName}!" else 'You are logged in!'
           $rootScope.redirect_to "dashboard.#{user.user_type.toLowerCase()}.profile", success: success_msg
       }
 

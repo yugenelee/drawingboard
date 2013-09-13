@@ -13,7 +13,7 @@ angular.module('common').service 'ErrorProcessor', [
           if defaultHandler?
             defaultHandler()
           else
-            $rootScope.notify_error 'Unable to save.'
+            $rootScope.notify_error 'Unable to complete your request. Please contact the administrator.'
 
     @process_login = (response, defaultHandler) ->
       switch response.status
@@ -23,7 +23,7 @@ angular.module('common').service 'ErrorProcessor', [
           if defaultHandler?
             defaultHandler()
           else
-            $rootScope.notify_error 'Login failed'
+            $rootScope.notify_error 'Sorry, we are unable to log you in. Please contact the administrator.'
 
     @process_registration = (response, defaultHandler) ->
       switch response.status
@@ -33,7 +33,7 @@ angular.module('common').service 'ErrorProcessor', [
           if defaultHandler?
             defaultHandler()
           else
-            $rootScope.notify_error 'Registration Failed'
+            $rootScope.notify_error 'Sorry, we are unable to proceed with registration. Please contact the administrator.'
 
     @process_forgot_password = (response, defaultHandler) ->
       switch response.status
@@ -43,7 +43,7 @@ angular.module('common').service 'ErrorProcessor', [
           if defaultHandler?
             defaultHandler()
           else
-            $rootScope.notify_error 'Sorry, we are unable to reset your password.'
+            $rootScope.notify_error 'Sorry, we are unable to reset your password. Please contact the administrator'
 
     @ #return self
 ]

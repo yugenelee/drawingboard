@@ -1,19 +1,26 @@
 <div id="top-bar">
   <div id="top-nav">
-    <a href="/"><img src="styles/img/logo.png"></a>
-    <div class="top-nav-bar">
-      <ul class="nav nav-pills pull-left">
-        <li><a href="#">Browse <img src="styles/img/b-icon.png"></a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Blog</a></li>
-        <li class="disabled"><a href="#">&nbsp;</a></li>
-      </ul>
-      <ul class="nav nav-pills pull-left">
-        <li><a href ng-click="openLoginDialog()">Login</a></li>
-        <li><a href ng-click="openRegisterDialog()">Signup</a></li>
-        <li class="disabled"><a href>&nbsp;</a></li>
-      </ul>
-      <button class="btn btn-primary pull-right" type="button">Start Listing</button></a></li>
+    <div class="row-fluid">
+      <div  class="pull-left logo-div">
+        <a href="/"><img src="styles/img/logo.png"></a>
+      </div>
+      <div class="top-nav-bar pull-right">
+        <ul class="nav nav-pills pull-left">
+          <li><a href="browse.php">Browse <img class="header-browse-icon" src="styles/img/b-icon.png"></a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Blog</a></li>
+          <li class="disabled"><a href="#">&nbsp;</a></li>
+        </ul>
+        <ul class="nav nav-pills pull-left">
+          <li><a href="login.php" data-toggle="">Login</a></li>
+          <li><a href="user-signup.php" data-toggle="">Signup</a></li>
+          <li><a href="cart.php">Cart</a></li>
+          <li><a href="account.php" data-toggle="">Events</a></li>
+          <li class="disabled"><a href="#">&nbsp;</a></li>
+        </ul>
+        <a href="merchant-register.php">
+          <button class="btn btn-primary pull-right" type="button">Start Listing</button></a>
+      </div>
     </div>
   </div>
 </div>
