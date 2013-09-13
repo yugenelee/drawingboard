@@ -59,7 +59,7 @@ module Api
         get 'get_from_account' do
           begin
             AccountServices::UserPolicy.get_user_from_account(params[:user_type], params[:auth_id], params[:auth_provider])
-          rescue Account::Services::Exception => e
+          rescue AccountServices::Exceptions::Exception => e
             handle_error e, params, 404
           end
         end

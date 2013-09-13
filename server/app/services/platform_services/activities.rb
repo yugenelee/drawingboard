@@ -1,7 +1,7 @@
-module ProjectServices
+module PlatformServices
   class Activities < Base
 
-    self.extend ProjectServices::DataAccessors
+    self.extend PlatformServices::DataAccessors
 
     class << self
       def add_bidder(pid, uid)

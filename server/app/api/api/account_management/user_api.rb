@@ -4,8 +4,8 @@ module Api
       extend Api::Base
 
       crud :user
-      crud :employer
-      crud :freelancer
+      crud :member
+      crud :vendor
 
       end
     end

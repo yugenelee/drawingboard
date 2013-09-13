@@ -46,9 +46,7 @@ module Api
     mount Api::AccountManagement::AuthApi
     mount Api::AccountManagement::ServicesApi
     mount Api::AccountManagement::UserApi # ordering is important! because of users/:id and users/authenticate
-
-    mount Api::ProjectManagement::ActivitiesApi
-    mount Api::ProjectManagement::ProjectApi
+    mount Api::Platform::InfoApi
 
     add_swagger_documentation(
         mount_path: 'apidocs',

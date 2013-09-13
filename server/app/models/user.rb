@@ -15,9 +15,6 @@ class User
   field :email
   field :first_name
   field :last_name
-  field :phone
-  field :location, default: 'Singapore'
-  field :photo_url
   field :password_digest
   field :has_password, type: Boolean, default: false
   field :email_confirmed, type: Boolean, default: false
