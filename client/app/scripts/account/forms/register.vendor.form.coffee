@@ -10,15 +10,22 @@ angular.module('account').directive 'registerVendorForm', [
       '$routeParams'
       'Vendor'
       'Service'
-      ($scope, $rootScope, $routeParams, Vendor, Service) ->
+      'FormHandler'
+      ($scope, $rootScope, $routeParams, Vendor, Service, FormHandler) ->
 
         $scope.hasError = (input) ->
           !input.$valid && (input.$dirty || $scope.submitted)
 
         $scope.submitForm = ->
-          $scope.submitted = true
-          $scope.clear_notifications()
-
+          if $scope.terms_and_conditions
+            $scope.submitted = true
+            if $scope.form.$valid
+              $rootScope.clear_notifications()
+              $rootScope.notify_success 'ok!'
+            else
+              FormHandler.validate $scope.form.$error
+          else
+            $rootScope.notify_error 'Please check that you have read the terms and conditions'
 
         $scope.removePhoto = (index) ->
           $scope.user.provider.provider_pictures.splice(index,1)
