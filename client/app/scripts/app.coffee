@@ -3,9 +3,9 @@ angular.module 'config', []
 angular.module 'common', [
   'ui.route'
   'config'
-  'ngRoute'
-  'ngTouch'
-  'ngAnimate'
+  #'ngRoute'
+  #'ngTouch'
+  #'ngAnimate'
   'ngCookies'
   'restangular'
   'ui.bootstrap'

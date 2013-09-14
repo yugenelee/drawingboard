@@ -2,9 +2,10 @@ class ProviderPicture
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :large_url
-  field :thumbnail_url
+  field :url
+  field :thumb_url
+  field :avatar_url
 
-  belongs_to :provider
+  embedded_in :provider
 
 end

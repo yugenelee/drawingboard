@@ -9,7 +9,7 @@ class Provider
   field :profile_description
 
   belongs_to :vendor
-  has_many :provider_pictures
+  embeds_many :provider_pictures
   has_many :request_for_quotes
   has_and_belongs_to_many :services
 

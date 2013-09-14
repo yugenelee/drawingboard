@@ -21,8 +21,8 @@ exports.config =
       order:
         before: [
           'vendor/jquery/jquery.min.js'
-          'vendor/angular/angular.min.js'
-          'vendor/angular/angular-route.min.js'
+          'vendor/angular/angular.js'
+          #'vendor/angular/angular-route.min.js'
           'vendor/lodash/lodash.min.js'
           'vendor/restangular/restangular.js'
           'vendor/jquery-file-upload/js/jquery.ui.widget.js'
