@@ -3,7 +3,7 @@ module Api
     class InfoApi < Grape::API
       extend Api::Base
 
-      all :service
+      crud :service
 
       resources 'services' do
         params do

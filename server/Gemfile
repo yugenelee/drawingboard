@@ -9,6 +9,8 @@ gem 'mongoid_search', git: 'git://github.com/mauriciozaffari/mongoid_search.git'
 gem 'mongoid-paranoia', github: 'simi/mongoid-paranoia' # before first release
 gem 'will_paginate_mongoid'
 
+gem 'active_model_serializers'
+
 gem 'grape'
 gem 'grape-swagger'
 gem 'thin'

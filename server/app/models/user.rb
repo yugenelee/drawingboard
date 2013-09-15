@@ -27,6 +27,7 @@ class User
   def blocked?; self.account_status == ACCOUNT_BLOCKED end
   def unread_notifications; notifications.where(read: false).order_by('created_at DESC') end
 
+=begin
   def as_json_options(options={})
     # val must be array!
     preset_options = {except: [:password_digest, :session, :email_sessions], include: [:auth_accounts],
@@ -53,4 +54,5 @@ class User
   def as_json(options={})
     super as_json_options(options)
   end
+=end
 end
