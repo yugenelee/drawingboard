@@ -13,7 +13,7 @@ module AccountServices
   POLICIES.freeze
   PROVIDER_POLICIES.freeze
 
-  USER_TYPES = %w[Freelancer Employer]
+  USER_TYPES = %w[Member Vendor]
 
   SUCCESS = 'SUCCESS'
   FAILED = 'FAILED'

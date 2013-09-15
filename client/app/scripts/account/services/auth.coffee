@@ -4,8 +4,9 @@ angular.module('account').service 'Auth',[
   'ErrorProcessor'
   'Session'
   'User'
+  'Provider'
   '$q'
-  ($rootScope, $http, ErrorProcessor, Session, User, $q) ->
+  ($rootScope, $http, ErrorProcessor, Session, User, Provider, $q) ->
 
     @create_session = (authenticated) ->
       Session.set(authenticated.user_type, authenticated.auth_id, authenticated.auth_provider, authenticated.token)
@@ -32,6 +33,18 @@ angular.module('account').service 'Auth',[
           $rootScope.notify_info 'An email has been sent to verify your email address.'
         else
           @authenticate(user_type, auth_id, auth_provider, password, true)
+      ), (response) ->
+        console.log response
+        ErrorProcessor.process_registration response
+
+    @register_vendor = (auth_id, auth_provider, email, password, additional_fields, provider_fields) ->
+      User.register('Vendor', auth_id, auth_provider, email, password, additional_fields).then ( (response)=>
+        provider_fields.vendor_id = response.user.id
+        Provider.create provider_fields
+        if response.email_confirmation
+          $rootScope.notify_info 'An email has been sent to verify your email address.'
+        else
+          @authenticate('Vendor', auth_id, auth_provider, password, true)
       ), (response) ->
         console.log response
         ErrorProcessor.process_registration response

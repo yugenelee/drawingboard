@@ -8,10 +8,10 @@ angular.module('account').directive 'registerVendorForm', [
       '$scope'
       '$rootScope'
       '$routeParams'
-      'Vendor'
       'Service'
       'FormHandler'
-      ($scope, $rootScope, $routeParams, Vendor, Service, FormHandler) ->
+      'Auth'
+      ($scope, $rootScope, $routeParams, Service, FormHandler, Auth) ->
 
         $scope.hasError = (input) ->
           !input.$valid && (input.$dirty || $scope.submitted)
@@ -21,7 +21,25 @@ angular.module('account').directive 'registerVendorForm', [
             $scope.submitted = true
             if $scope.form.$valid
               $rootScope.clear_notifications()
-              $rootScope.notify_success 'ok!'
+              additional_fields =
+                first_name: $scope.user.vendor.first_name
+                last_name: $scope.user.vendor.last_name
+                mobile: $scope.user.vendor.mobile
+                phone: $scope.user.vendor.phone
+                role: $scope.user.vendor.role
+                mailing_address: $scope.user.vendor.mailing_address
+                acra_no: $scope.user.vendor.acra_no
+
+              provider_fields =
+                name: $scope.user.provider.name
+                address: $scope.user.provider.address
+                map_address: $scope.user.provider.map_address
+                browse_description: $scope.user.provider.browse_description
+                profile_description: $scope.user.provider.profile_description
+                provider_pictures: $scope.user.provider.provider_pictures
+                services: Object.keys($scope.user.provider.checked_services)
+
+              Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
             else
               FormHandler.validate $scope.form.$error
           else

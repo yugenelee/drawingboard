@@ -16,7 +16,7 @@ class Vendor < User
 
   def as_json_options(options={})
     # val must be array!
-    exposed = [:_deny_fields]
+    exposed = [:providers, :_deny_fields]
     preset_options = {methods: exposed}
     if defined?(super)
       super(preset_options).each do |key,val|

@@ -85,9 +85,9 @@
         <div class="span2"><label>Email*</label></div>
         <div class="span4"><input ng-model="user.vendor.email" name="email" type="email" required></div>
         <div class="span2"><label>Confirm Email*</label></div>
-        <div class="span4"><input match="user.vendor.email" ng-model="confirm_email" name="emailConfirm" type="email" required></div>
+        <div class="span4"><input match="user.vendor.email" ng-model="confirm_email" name="email_confirmation" type="email" required></div>
       </div>
-      <div class="row-fluid control-group" ng-show="form.emailConfirm.$error.match">
+      <div class="row-fluid control-group" ng-show="form.email_confirmation.$error.match">
         <div class="span12">
           <span class="msg-error">Email and Confirm Email must match.</span>
         </div>
@@ -101,12 +101,12 @@
         </div>
         <div class="span2"><label>Confirm Password*</label></div>
         <div class="span4">
-          <input class="" type="password" name="passwordConfirm"
+          <input class="" type="password" name="password_confirmation"
                  ng-model="confirm_password" match="user.vendor.password" required>
         </div>
       </div>
 
-      <div class="row-fluid control-group" ng-show="form.passwordConfirm.$error.match">
+      <div class="row-fluid control-group" ng-show="form.password_confirmation.$error.match">
         <div class="span12">
           <span class="msg-error">Password do not match</span>
         </div>
