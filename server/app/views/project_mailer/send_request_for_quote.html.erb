@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="initial-scale=1.0">
+  <!-- So that mobile webkit will display zoomed in -->
+  <meta name="format-detection" content="telephone=no">
+  <!-- disable auto telephone linking in iOS -->
+
+  <title>DrawingBoard Events | Request for Quotation</title>
+  <style type="text/css">
+          /* Resets: see reset.css for details */
+      .ReadMsgBody {
+          width: 100%;
+          background-color: #ebebeb;
+      }
+      .ExternalClass {
+          width: 100%;
+          background-color: #ebebeb;
+      }
+      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+          line-height: 100%;
+      }
+
+      body {
+          -webkit-text-size-adjust: none;
+          -ms-text-size-adjust: none;
+          margin: 0;
+          padding: 0;
+
+      }
+      table {
+          border-spacing: 0;
+      }
+      table td {
+          border-collapse: collapse;
+      }
+      .yshortcuts a {
+          border-bottom: none !important;
+      }
+
+          /* Constrain email width for small screens */
+      @media screen and (max-width: 600px) {
+          table[class="container"] {
+              width: 95% !important;
+          }
+      }
+
+          /* Give content more room on mobile */
+      @media screen and (max-width: 480px) {
+          td[class="container-padding"] {
+              padding-left: 12px !important;
+              padding-right: 12px !important;
+          }
+      }
+      .table-desc {
+          margin: 0px 0px 10px;
+          padding: 0px;
+          width: 100%;
+          border: 1px solid #eeeeee;
+      }
+      .table-desc table {
+          width: 100%;
+          height: 100%;
+          margin: 0px;
+          padding: 0px;
+      }
+      .table-desc tr:hover td {
+          background-color: #ffffff;
+      }
+      .table-desc td {
+          vertical-align: top;
+          background-color: #ffffff;
+          border: 1px solid #eeeeee;
+          border-width: 0px 1px 1px 0px;
+          text-align: left;
+          padding: 5px;
+          font-size: 13px;
+          line-height: 19px;
+          font-family: Arial;
+          font-weight: normal;
+          color: #000000;
+      }
+      .table-desc tr:last-child td {
+          border-width: 0px 1px 0px 0px;
+      }
+      .table-desc tr td:last-child {
+          border-width: 0px 0px 1px 0px;
+      }
+      .table-desc tr:last-child td:last-child {
+          border-width: 0px 0px 0px 0px;
+      }
+
+  </style>
+</head>
+<body style="margin:0; padding:10px 0;" bgcolor="#ebebeb" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<br>
+
+<!-- 100% wrapper (grey background) -->
+<table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#ebebeb">
+  <tr>
+    <td align="center" valign="top" bgcolor="#ebebeb" style="background-color: #ebebeb;"><!-- 600px container (white background) -->
+
+      <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" bgcolor="#ffffff">
+        <tr>
+          <td class="container-padding" bgcolor="#ffffff" style="background-color: #ffffff; padding-left: 30px; padding-right: 30px; font-size: 14px; line-height: 20px; font-family: Helvetica, sans-serif; color: #333;"><br>
+            <div style="text-align: center; margin: 20px 0px 20px; border-bottom: 1px dotted #ddd; padding-bottom: 20px;"> <img src="<%= attachments['logo.png'].url %>" alt="DrawingBoard Events Logo"> </div>
+
+            <!-- ### BEGIN CONTENT ### -->
+
+            <div style="font-weight: bold; font-size: 22px; line-height: 28px; margin-bottom:5px	; color: #fb6025; text-align: center;"> Congratulation! </div>
+            <div style="font-weight: bold; font-size: 16px; line-height: 26px; color: #333333; text-align: center;"> Someone has just requested a quote from you.</div>
+            <br>
+            <div class="table-desc" >
+              <table >
+                <tr>
+                  <td width="120">Event Name</td>
+                  <td><%= @event.name %></td>
+                </tr>
+                <tr>
+                  <td>Date</td>
+                  <td><%= @event.date %></td>
+                </tr>
+                <tr>
+                  <td>Time</td>
+                  <td><%= @event.starts_at %> - <%= @event.ends_at %></td>
+                </tr>
+                <tr>
+                  <td>Number of Guest</td>
+                  <td><%= @event.number_of_guests %></td>
+                </tr>
+                <tr>
+                  <td>Location(s)</td>
+                  <td><%= @event.location %></td>
+                </tr>
+                <tr>
+                  <td>Vision for the Upcoming Event:</td>
+                  <td><%= @event.vision %></td>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td><%= @event.member.first_name %> <%= @event.member.last_name %></td>
+                </tr>
+                <tr>
+                  <td>Contact Number</td>
+                  <td style="color: #fb6025;"><b>Please list with us to unlock this</b></td>
+                </tr>
+                <tr>
+                  <td>Alternate Contact Number</td>
+                  <td style="color: #fb6025;"><b>Please list with us to unlock this</b></td>
+                </tr>
+              </table>
+            </div>
+            <br>
+            <div class="active-button" style="text-align: center;"> <a href="mailto:<%= @event.contact_email %>" style="padding: 12px 40px;background-color: #f66201;border: 1px solid #cccccc;border-color: #f89406 #f89406 #ad6704;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color: #fff!important;
+                    font-size: 16px!important; text-decoration: none;
+                    line-height: 22px;">Reply</a> </div>
+            <br>
+            <div style="border-top:  1px dotted #ddd; margin: 20px 0px;"></div>
+            If you have any further question, please <a href="mailto:support@drawingboardevents.com" target="_blank" style="color: #f66201; text-decoration: underline;">contact us</a> or visit our <a href="http://drawingboardevents.com/faq" style="color: #f66201;" target="_blank">support site</a>. <br>
+            <br>
+            Sincerely,<br>
+            The DrawingBoard support team <br>
+            <br>
+            <br>
+
+            <!-- ### END CONTENT ### --></td>
+        </tr>
+      </table>
+
+      <!--/600px container --></td>
+  </tr>
+</table>
+<!--/100% wrapper-->
+
+<div style="text-align: center;font-size: 12px; text-shadow: 0px 1px #f6f6f6; color: #666; font-family: 'Arial', sans-serif; margin: 15px 0px;">Learn more about us at: <a href="" style="text-decoration: none; color: #666;">facebook</a> | <a style="text-decoration: none; color: #666;" href="">twitter</a> | <a href="" style="text-decoration: none; color: #666;">pinterest</a></div>
+<br>
+<br>
+</body>
+</html>

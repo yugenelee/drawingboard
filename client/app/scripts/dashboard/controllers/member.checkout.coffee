@@ -33,10 +33,9 @@ angular.module('dashboard').controller 'DashboardMemberCheckoutCtrl', [
       if $scope.terms_and_conditions
         if $scope.form.$valid
           $scope.clear_notifications()
-          promise = Event.save_form $scope.form_object
+          promise = Event.submit_form $scope.form_object
           success_msg = 'Your request has been submitted.'
           promise.then ((object)->
-            Event.send_quote_request($scope.form_object.id)
             $scope.redirect_to "dashboard.member.events" ,success: success_msg
           ), ->
             $scope.notify_error 'Form has missing or invalid values'
