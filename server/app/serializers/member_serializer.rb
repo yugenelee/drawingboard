@@ -11,6 +11,7 @@ class MemberSerializer < ActiveModel::Serializer
              :phone,
              :mobile
 
-  has_many :events
+  has_many :upcoming_events
+  has_many :past_events
 
 end

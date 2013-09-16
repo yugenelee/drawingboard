@@ -16,48 +16,38 @@
             <div class="content-main">
 
               <h3>MY UPCOMING EVENTS</h3>
-              <p>You haven't created any event yet. <a href="">Create a new event now!</a></p>
-              <table class="events table table-bordered table-condensed">
+              <p ng-if="current_user.upcoming_events.length == 0">You haven't created any event yet. <a href="/#/event.new">Create a new event now!</a></p>
+              <table ng-if="current_user.upcoming_events.length > 0"
+                     class="events table table-bordered table-condensed">
                 <tr>
                   <th>Event Date</th>
                   <th>Event Name</th>
                   <th>DrawingBoard(s) submitted</th>
                   <th class="span3">Details</th>
                 </tr>
-                <tr>
-                  <td>23/09/13</td>
-                  <td><span>Jamie's 21st Birthday Party</span></td>
-                  <td>Submitted on 13:50, 16/05/13</td>
-                  <td><a href="">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>12/10/13</td>
-                  <td><span>Anna's Wedding</span></td>
-                  <td>Submitted on 13:50, 16/05/13</td>
-                  <td><a href="">Edit</a></td>
+                <tr ng-repeat="event in current_user.upcoming_events">
+                  <td>{{ event.date }}</td>
+                  <td><span>{{ event.name }}</span></td>
+                  <td>Submitted on {{ event.updated_at | date:'MM/dd/yyyy @ h:mma' }}</td>
+                  <td><a ng-href="/#/event.edit/{{ event.id }}">Edit</a></td>
                 </tr>
               </table>
               <hr>
               <h3>MY PAST EVENTS</h3>
-              <p>You have no past event on list yet.</p>
-              <table class="events table table-bordered table-condensed">
+              <p ng-if="current_user.past_events.length == 0">You have no past event on list yet.</p>
+              <table ng-if="current_user.past_events.length > 0"
+                     class="events table table-bordered table-condensed">
                 <tr>
                   <th>Event Date</th>
                   <th>Event Name</th>
                   <th>DrawingBoard(s) submitted</th>
                   <th class="span3">Details</th>
                 </tr>
-                <tr>
-                  <td>23/09/13</td>
-                  <td><span>Jamie's 21st Birthday Party</span></td>
-                  <td>Submitted on 13:50, 16/05/13</td>
-                  <td><a href="">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>12/10/13</td>
-                  <td><span>Anna's Wedding</span></td>
-                  <td>Submitted on 13:50, 16/05/13</td>
-                  <td><a href="">Edit</a></td>
+                <tr ng-repeat="event in current_user.past_events">
+                  <td>{{ event.date }}</td>
+                  <td><span>{{ event.name }}</span></td>
+                  <td>Submitted on {{ event.updated_at | date:'MM/dd/yyyy @ h:mma' }}</td>
+                  <td><a ng-href="/#/event.edit/{{ event.id }}">Edit</a></td>
                 </tr>
               </table>
             </div>
