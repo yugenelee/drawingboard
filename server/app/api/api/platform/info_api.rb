@@ -17,6 +17,7 @@ module Api
       end # end users resource
 
       crud :service
+      crud :event
 
     end
   end
