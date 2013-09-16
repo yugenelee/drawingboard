@@ -23,14 +23,6 @@ GIT
     mongoid-erd (0.0.8)
       rviz
 
-GIT
-  remote: git://github.com/simi/mongoid-paranoia.git
-  revision: 02de92ffb5921e5fb51101133998db264335e576
-  specs:
-    mongoid-paranoia (0.1)
-      activemodel (~> 4.0.0)
-      mongoid (~> 4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -168,7 +160,6 @@ DEPENDENCIES
   grape-swagger
   mongoid!
   mongoid-erd!
-  mongoid-paranoia!
   mongoid_search!
   mongoid_taggable_with_context
   rack-cors
