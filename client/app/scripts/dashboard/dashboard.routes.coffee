@@ -11,6 +11,7 @@ angular.module('dashboard').config [
     .when('dashboard.vendor.profile')
     .when('dashboard.member.events')
     .when('dashboard.member.cart')
+    .when('dashboard.member.profile')
     .when('listing.new', omitController: true)
     .when('listing.edit/:id', omitController: true)
 ]

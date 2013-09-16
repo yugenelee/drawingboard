@@ -12,5 +12,5 @@ angular.module('account').config [
     .when('register.vendor')
     .when('forgot_password')
     .when('reset_password/:userId/:token')
-    .when('account.email_confirmation/:userId/:token', omitView: true)
+    .when('account.email_confirmation/:userId/:token', omitView: true, omitController: false)
 ]

@@ -7,7 +7,9 @@ class MemberSerializer < ActiveModel::Serializer
              :email,
              :has_password,
              :email_confirmed,
-             :account_status
+             :account_status,
+             :phone,
+             :mobile
 
   has_many :events
 
