@@ -51,7 +51,7 @@ angular.module('dashboard').directive 'listingForm', [
               $scope.form_object =
                 vendor_id: $scope.user.id
                 provider_pictures: []
-              $scope.form_object.checked_services = {}
+                checked_services: {}
               FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
 
             when 'edit'
