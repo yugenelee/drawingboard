@@ -21,7 +21,7 @@
                   <th class="span3">Details</th>
                 </tr>
                 <tr ng-repeat="provider in current_user.providers">
-                  <td><a href="the-prime-society.php">{{ provider.name }}</a></td>
+                  <td><a href="/#/provider/{{ provider.id }}">{{ provider.name }}</a></td>
                   <td><span>{{ _.pluck(provider.services, "display_name").join(', ') }}</span></td>
                   <td class="">{{ provider.status }}</td>
                   <td><a ng-href="/#/listing.edit/{{ provider.id }}">Edit</a></td>

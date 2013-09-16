@@ -5,5 +5,7 @@ angular.module('platform').config [
 
     WardenProvider.simplify($routeProvider).set_template_prefix('views/platform')
     .when('service_categories', omitController: true)
-    .when('services/:name', resolves: ['service'])
+    .when('services/:service_name', resolves: ['service'])
+    .when('provider/:id', resolves: ['provider', 'service'])
+    .when('provider/:id/:service_name', resolves: ['provider', 'service'])
 ]

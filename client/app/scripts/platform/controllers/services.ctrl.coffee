@@ -3,4 +3,5 @@ angular.module('platform').controller 'ServicesCtrl', [
   'service'
   ($scope, service) ->
     $scope.service = service
+    console.log(service)
 ]

@@ -9,5 +9,4 @@ class ProviderSerializer < ActiveModel::Serializer
 
   has_many :provider_pictures
   has_many :services
-
 end
