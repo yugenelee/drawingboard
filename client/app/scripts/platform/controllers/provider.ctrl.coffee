@@ -42,8 +42,7 @@ angular.module('platform').controller 'ProviderCtrl', [
               $modalInstance.close()
             $scope.confirm = ->
               angular.forEach $scope.selected_services, (checked, service) ->
-                Cart.add service, provider.id if checked
-              console.log Cart.get()
+                Cart.add service, provider if checked
               $modalInstance.close()
         ]
 

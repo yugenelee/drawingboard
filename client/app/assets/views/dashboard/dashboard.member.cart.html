@@ -11,13 +11,24 @@
                   <h3>CART</h3>
                 </div>
                 <accordion close-others="true">
-                  <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                  <accordion-group ng-repeat="(key, value) in cart">
                     <accordion-heading>
-                      I can have markup, too! <i class="icon-check"></i>
+                      {{ key }}  <span class="cart-count">({{ lengthOfHash(value) }})</span>
                     </accordion-heading>
-                    This is just some content to illustrate fancy headings.
+                    <div class="cart-item-div" ng-repeat="(id, provider_name) in value">{{ provider_name }}
+                      <a ng-click="remove(key, id)" class="a-remove">Remove</a>
+                    </div>
                   </accordion-group>
                 </accordion>
+              </div>
+
+              <div>
+                These services are for:
+                <select ng-model="selected_event" ng-options="value.id as value.name for value in current_user.upcoming_events"></select>
+              </div>
+
+              <div>
+                <button class="btn btn-long btn-danger">Checkout</button>
               </div>
             </div>
           </div>

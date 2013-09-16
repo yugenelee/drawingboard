@@ -15,10 +15,17 @@ angular.module('platform').factory 'Cart',[
       get: ->
         @cart
 
-      add: (service_name, provider_id) ->
+      add: (service_name, provider) ->
         if angular.isUndefined @cart[service_name]
           @cart[service_name] = {}
-        @cart[service_name][provider_id] = true
+        @cart[service_name][provider.id] = provider.name
+        $cookieStore.put 'CartSession', @get()
+
+      remove: (service_name, provider_id) ->
+        delete @cart[service_name][provider_id]
+        if Object.keys(@cart[service_name]).length == 1
+          delete @cart[service_name]
+        else
         $cookieStore.put 'CartSession', @get()
 
       destroy: ->

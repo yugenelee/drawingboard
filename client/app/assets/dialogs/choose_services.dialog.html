@@ -4,7 +4,6 @@
       <button type="button" class="btn btn-info" ng-model="selected_services[service.name]" btn-checkbox>{{ service.display_name }}</button>
     </div>
   </div>
-          <pre>{{ selected_services | json }}</pre>
   <div class="modal-footer">
     <button class="btn" ng-click="cancel()">Cancel</button>
     <button class="btn btn-warning"  ng-click="confirm()">Request</button>

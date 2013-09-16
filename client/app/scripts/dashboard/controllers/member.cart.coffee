@@ -3,7 +3,11 @@ angular.module('dashboard').controller 'DashboardMemberCartCtrl', [
   'Cart'
   ($scope, Cart) ->
 
-    console.log $scope
-    #CartSession.add
+    $scope.cart = Cart.get()
 
+    $scope.remove = (service_name, provider_id) ->
+      Cart.remove(service_name, provider_id)
+
+    $scope.lengthOfHash = (hash) ->
+      Object.keys(hash).length - 1
 ]
