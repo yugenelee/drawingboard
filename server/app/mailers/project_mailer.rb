@@ -3,6 +3,7 @@ class ProjectMailer < ActionMailer::Base
 
   #AdminEmail = 'felixsagitta@gmail.com, fannytham@creativesatwork.me, jaycetham@creativesatwork.me, melvinsng@creativesatwork.me'
   AdminEmail = 'felixsagitta@gmail.com'
+  SiteUrl = 'http://felix.creativesatwork.me'
   #SiteUrl = 'http://staging.creativesatwork.me'
   #SiteUrl = 'http://localhost:3333'
 
