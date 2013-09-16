@@ -13,9 +13,6 @@ angular.module('account').directive 'registerVendorForm', [
       'Auth'
       ($scope, $rootScope, $routeParams, Service, FormHandler, Auth) ->
 
-        $scope.hasError = (input) ->
-          !input.$valid && (input.$dirty || $scope.submitted)
-
         $scope.submitForm = ->
           if $scope.terms_and_conditions
             $scope.submitted = true
@@ -37,7 +34,10 @@ angular.module('account').directive 'registerVendorForm', [
                 browse_description: $scope.user.provider.browse_description
                 profile_description: $scope.user.provider.profile_description
                 provider_pictures: $scope.user.provider.provider_pictures
-                services: Object.keys($scope.user.provider.checked_services)
+
+              provider_fields.service_ids = []
+              angular.forEach $scope.user.provider.checked_services, (checked, id) ->
+                provider_fields.service_ids.push(id) if checked
 
               Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
             else
@@ -45,46 +45,14 @@ angular.module('account').directive 'registerVendorForm', [
           else
             $rootScope.notify_error 'Please check that you have read the terms and conditions'
 
-        $scope.removePhoto = (index) ->
-          $scope.user.provider.provider_pictures.splice(index,1)
-
-
-        $scope.$on 'fileupload:add', (e, data)->
-          $scope.$apply ->
-            switch data.id
-              when 'photo-uploader'
-                $scope.photo_upload_state = 'Uploading...'
-
-
-        $scope.$on 'fileupload:done', (e, data) ->
-          $scope.$apply ->
-            console.log 'upload result:'
-            console.log data
-            url = data.data.result?.data?.content?.url
-            avatar_url = data.data.result?.data?.avatar?.url
-            thumb_url = data.data.result?.data?.thumb?.url
-            if url?
-              switch data.id
-                when 'photo-uploader'
-                  $scope.photo_upload_state = ''
-                  $scope.user.provider.provider_pictures.push
-                    url: data.domain + url
-                    avatar_url: data.domain + avatar_url
-                    thumb_url: data.domain + thumb_url
-
-
-
-        $scope.$on 'fileupload:failed', ->
-          $scope.error_notification 'Failed to upload picture.', false
-
 
         init = ->
-          console.log($scope)
-          $scope.submitted = false
+          FormHandler.formify $scope
           $scope.user =
             vendor: {}
             provider:
               provider_pictures: []
+          FormHandler.handleImage($scope, 'provider_picture', $scope.user.provider.provider_pictures)
           $scope.user.provider.checked_services = {}
           $scope.services = Service.all
             order: 'created_at ASC'

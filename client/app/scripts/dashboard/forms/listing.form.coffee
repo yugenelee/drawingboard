@@ -44,12 +44,14 @@ angular.module('dashboard').directive 'listingForm', [
             $rootScope.notify_info 'Please check that you have read the terms and conditions'
 
         init = ->
-          FormHandler.formify $scope, $scope.type
+          FormHandler.formify $scope
           $scope.services = Service.all()
           switch $scope.type
             when 'new'
               $scope.form_object =
                 vendor_id: $scope.user.id
+                provider_pictures: []
+              $scope.form_object.checked_services = {}
               FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
 
             when 'edit'

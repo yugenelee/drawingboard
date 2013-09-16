@@ -2,16 +2,16 @@ angular.module('common').service 'FormHandler', [
   '$rootScope'
   ($rootScope) ->
 
-    @formify = (scope, type) ->
+    @formify = (scope) ->
       scope.submitted = false
       scope.form_object = {}
       scope.hasError = (input) ->
         !input.$valid && (input.$dirty || scope.submitted)
-      scope.removeAssoc = (assoc_name, index) ->
-        if scope.form_object[assoc_name][index].id?
-          scope.form_object[assoc_name][index]._destroy = true
+      scope.removeAssoc = (assoc, index) ->
+        if assoc[index].id?
+          assoc[index]._destroy = true
         else
-          scope.form_object[assoc_name].splice(index, 1)
+          assoc.splice(index, 1)
     
     @validate = (form_errors) ->
       window.scrollTo(0)

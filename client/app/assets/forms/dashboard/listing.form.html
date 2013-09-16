@@ -1,4 +1,5 @@
 <form class="form-horizontal" novalidate ng-submit="submitForm()" name="form">
+  {{ form_object | json }}
   <div class="control-group" ng-class="{error: hasError(form.name)}">
     <label class="control-label" for="inputVendor">Vendor Name</label>
     <div class="controls">
@@ -50,7 +51,7 @@
     <div class="fileupload-div" ng-hide="photo._destroy">
       <div>
         <img ng-src = "{{ photo.url }}" style="max-width: 150px;">
-        <a href ng-click="removeAssoc('provider_pictures', $index)" class="btn fileupload-exists">Remove</a>
+        <a href ng-click="removeAssoc(form_object.provider_pictures, $index)" class="btn fileupload-exists">Remove</a>
       </div>
     </div>
   </div>

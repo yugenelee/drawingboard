@@ -3,8 +3,6 @@ module Api
     class InfoApi < Grape::API
       extend Api::Base
 
-      crud :service
-
       resources 'services' do
         params do
           requires :name
@@ -17,6 +15,8 @@ module Api
           end
         end
       end # end users resource
+
+      crud :service
 
     end
   end

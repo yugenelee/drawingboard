@@ -37,30 +37,30 @@
       <div>
         <span class="btn btn-file">Upload Picture&nbsp;&nbsp;&nbsp;
           <input type="file" fileupload name="picture"
-                 uploader-id="photo-uploader"
+                 uploader-id="provider_picture"
                  server-domain="http://sgattractions.com:3003"
                  service-path="pictures" />
-          <span ng-bind="photo_upload_state"></span>
+          <span ng-bind="provider_picture_state"></span>
         </span>
       </div>
     </div>
   </div>
 
   <div class="control-group" ng-repeat="photo in user.provider.provider_pictures">
-    <div class="fileupload-div">
+    <div class="fileupload-div" ng-hide="photo._destroy">
       <div>
         <img ng-src = "{{ photo.url }}" style="max-width: 150px;">
-        <a href ng-click="removePhoto($index)" class="btn fileupload-exists">Remove</a>
+        <a href ng-click="removeAssoc(user.provider.provider_pictures, $index)" class="btn fileupload-exists">Remove</a>
       </div>
     </div>
   </div>
 
 
 
-  <div class="row-fluid control-group">
+  <div class="row-fluid control-group" ng-class="{error: hasError(form.map_address)}">
     <div class="span12">
       <label>Map Address*</label>
-      <textarea ng-model="user.provider.map_address" rows="3" class="span12" required></textarea>
+      <textarea ng-model="user.provider.map_address" rows="3" class="span12" name="map_address" required></textarea>
     </div>
   </div>
 
