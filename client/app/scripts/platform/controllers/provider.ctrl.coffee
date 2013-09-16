@@ -3,7 +3,8 @@ angular.module('platform').controller 'ProviderCtrl', [
   'provider'
   'service'
   '$modal'
-  ($scope, provider, service, $modal) ->
+  'Cart'
+  ($scope, provider, service, $modal, Cart) ->
     $scope.provider = provider
     $scope.service = service
     $scope.provider_pictures_pairs = []
@@ -24,6 +25,25 @@ angular.module('platform').controller 'ProviderCtrl', [
           ($scope, $modalInstance) ->
             $scope.picture_url = url
             $scope.close = ->
+              $modalInstance.close()
+        ]
+
+    $scope.openQuoteDialog = ->
+      $modal.open
+        templateUrl: 'dialogs/choose_services.dialog.html'
+        windowClass: 'modal'
+        controller: [
+          '$scope'
+          '$modalInstance'
+          ($scope, $modalInstance) ->
+            $scope.services = provider.services
+            $scope.selected_services = {}
+            $scope.cancel = ->
+              $modalInstance.close()
+            $scope.confirm = ->
+              angular.forEach $scope.selected_services, (checked, service) ->
+                Cart.add service, provider.id if checked
+              console.log Cart.get()
               $modalInstance.close()
         ]
 

@@ -1,0 +1,28 @@
+<div class="main-container">
+  <div id="main-content" class="container">
+    <div class="row">
+      <div class="span12">
+        <div class="row">
+          <sidebar></sidebar>
+          <div class="span9">
+            <div class="content-main">
+              <div>
+                <div class="row-fluid">
+                  <h3>CART</h3>
+                </div>
+                <accordion close-others="true">
+                  <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                    <accordion-heading>
+                      I can have markup, too! <i class="icon-check"></i>
+                    </accordion-heading>
+                    This is just some content to illustrate fancy headings.
+                  </accordion-group>
+                </accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
