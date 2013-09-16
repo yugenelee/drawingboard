@@ -1,6 +1,7 @@
 class Provider
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Includable::Serializer
 
   PENDING_APPROVAL = 'Pending Approval'
   APPROVED = 'Approved'

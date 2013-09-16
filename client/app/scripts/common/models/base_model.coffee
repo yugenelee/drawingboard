@@ -55,7 +55,7 @@ class BaseModel
     queries =
       limit: 1000
       offset: 0
-      order: 'created_at DESC'
+      order: 'updated_at DESC'
       page: 1
       per_page: 100
     queries.limit = options.limit if options.limit?

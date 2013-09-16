@@ -1,0 +1,65 @@
+angular.module('dashboard').directive 'listingForm', [
+  ->
+    restrict: 'EA'
+    replace: true
+    scope: {
+      type: '@'
+      user: '='
+    }
+    templateUrl: 'forms/dashboard/listing.form.html'
+    controller: [
+      '$scope'
+      '$rootScope'
+      '$routeParams'
+      'FormHandler'
+      'Provider'
+      'Service'
+      ($scope, $rootScope, $routeParams, FormHandler, Entity, Service) ->
+
+        $scope.submitForm = ->
+          $scope.submitted = true
+          if $scope.terms_and_conditions
+            if $scope.form.$valid
+              $rootScope.clear_notifications()
+
+              $scope.form_object.service_ids = []
+              angular.forEach $scope.form_object.checked_services, (checked, id) ->
+                $scope.form_object.service_ids.push(id) if checked
+              delete $scope.form_object.services
+
+              switch $scope.type
+                when 'new'
+                  promise = Entity.create $scope.form_object, notify_success: false
+                  success_msg = 'Listing has been submitted'
+                when 'edit'
+                  promise = $scope.form_object.put()
+                  success_msg = 'Your listing is updated successfully'
+              promise.then ((object)->
+                $rootScope.redirect_to "dashboard.vendor.listing" ,success: success_msg
+              ), ->
+                $rootScope.notify_error 'Form has missing or invalid values'
+            else
+              FormHandler.validate $scope.form.$error
+          else
+            $rootScope.notify_info 'Please check that you have read the terms and conditions'
+
+        init = ->
+          FormHandler.formify $scope, $scope.type
+          $scope.services = Service.all()
+          switch $scope.type
+            when 'new'
+              $scope.form_object =
+                vendor_id: $scope.user.id
+              FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
+
+            when 'edit'
+              Entity.find($routeParams.id).then (obj) ->
+                $scope.form_object = obj
+                $scope.form_object.checked_services = {}
+                angular.forEach obj.services, (input) -> $scope.form_object.checked_services[input.id] = true
+                FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
+
+
+        init()
+    ]
+]

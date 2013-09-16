@@ -24,14 +24,7 @@
                   <td><a href="the-prime-society.php">{{ provider.name }}</a></td>
                   <td><span>{{ _.pluck(provider.services, "display_name").join(', ') }}</span></td>
                   <td class="">{{ provider.status }}</td>
-                  <td><a href="merchant-register.php">Edit</a></td>
-                </tr>
-                <tr>
-                  <td><a href="the-prime-society.php">Crystal Jade Kitchen</a></td>
-                  <td><span>Venue,
-                    Catering </span></td>
-                  <td class="">Listed</td>
-                  <td><a href="merchant-register.php">Edit</a></td>
+                  <td><a ng-href="/#/listing.edit/{{ provider.id }}">Edit</a></td>
                 </tr>
               </table>
               <hr>
