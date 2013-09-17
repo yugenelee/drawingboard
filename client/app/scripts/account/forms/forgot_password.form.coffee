@@ -11,8 +11,6 @@ angular.module('account').directive 'forgotPasswordForm', [
       'Auth'
       ($scope, $rootScope, $routeParams, Auth) ->
 
-        alert 'hey'
-
         $scope.hasError = (input) ->
           !input.$valid && (input.$dirty || $scope.submitted)
 
