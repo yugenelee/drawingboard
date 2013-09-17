@@ -9,7 +9,8 @@ angular.module('account').directive 'registerMemberForm', [
       '$rootScope'
       '$routeParams'
       'Auth'
-      ($scope, $rootScope, $routeParams, Auth) ->
+      'FormHandler'
+      ($scope, $rootScope, $routeParams, Auth, FormHandler) ->
 
         $scope.hasError = (input) ->
           !input.$valid && (input.$dirty || $scope.submitted)
@@ -21,10 +22,10 @@ angular.module('account').directive 'registerMemberForm', [
             additional_fields = {
               first_name: $scope.user.first_name,
               last_name: $scope.user.last_name,
-              photo_url: 'styles/img/profile.jpg'
             }
             Auth.register('Member', $scope.user.email, 'local', $scope.user.email, $scope.user.password, additional_fields)
-
+          else
+            FormHandler.validate $scope.form.$error
         init = ->
           $scope.submitted = false
         init()
