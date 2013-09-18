@@ -5,7 +5,7 @@ class Member < User
   field :mobile
   has_many :events
   has_many :reviews, inverse_of: :reviewer
-  has_and_belongs_to_many :votes, inverse_of: :voters
+  #has_and_belongs_to_many :votes, inverse_of: :voters
 
   validates :email, presence: true, uniqueness: true,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i}
