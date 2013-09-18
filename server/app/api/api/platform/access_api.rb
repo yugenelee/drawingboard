@@ -19,7 +19,7 @@ module Api
             handle_error e, params, 404
           end
         end
-      end # end users resource
+      end # end events resource
 
       resources 'services' do
         params do
@@ -32,7 +32,19 @@ module Api
             handle_error e, params, 404
           end
         end
-      end # end users resource
+      end # end services resource
+
+      resources 'providers' do
+        put ':id/approve' do
+          begin
+            provider = Provider.find params[:id]
+            provider.status = Provider::APPROVED
+            provider.save!
+          rescue PlatformServices::Exceptions::Exception => e
+            handle_error e, params, 404
+          end
+        end
+      end # end services resource
 
       crud :provider
       crud :service

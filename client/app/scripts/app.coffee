@@ -1,6 +1,7 @@
 angular.module 'config', []
 angular.module 'fork', []
 angular.module 'account', []
+angular.module 'admin', []
 angular.module 'dashboard', []
 angular.module 'pages', []
 angular.module 'platform', []
@@ -22,6 +23,7 @@ angular.module 'app', [
   'config'
   'common'
   'dashboard'
+  'admin'
   'account'
   'pages'
   'platform'

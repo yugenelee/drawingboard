@@ -22,7 +22,9 @@ class MemberSerializer < ActiveModel::Serializer
              :account_status,
              :phone,
              :mobile,
-             :reviews_wrote
+             :reviews_wrote,
+             :created_at,
+             :updated_at
 
   has_many :upcoming_events
   has_many :past_events

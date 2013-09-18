@@ -6,6 +6,7 @@ module Api
       crud :user
       crud :member
       crud :vendor
+      crud :admin
 
       end
     end

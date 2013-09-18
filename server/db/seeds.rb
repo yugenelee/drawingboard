@@ -18,3 +18,5 @@ categories = {
 categories.each do |name, display_name|
   Service.create!(name: name.to_s, display_name: display_name)
 end
+
+AccountServices::UserService.register('Admin','admin@drawingboard.com', 'local', 'admin@drawingboard.com', 'pass1234', {first_name: 'DrawingBoard', last_name: 'Admin'})

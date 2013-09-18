@@ -1,4 +1,4 @@
-class VendorSerializer < ActiveModel::Serializer
+class AdminSerializer < ActiveModel::Serializer
   attributes :id,
              :_type,
              :user_type,
@@ -8,14 +8,7 @@ class VendorSerializer < ActiveModel::Serializer
              :has_password,
              :email_confirmed,
              :account_status,
-             :role,
-             :phone,
-             :mobile,
-             :acra_no,
-             :mailing_address,
-             :questions,
              :created_at,
              :updated_at
 
-  has_many :providers
 end

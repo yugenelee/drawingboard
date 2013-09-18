@@ -5,7 +5,9 @@ class ProviderForServiceSerializer < ActiveModel::Serializer
              :map_address,
              :browse_description,
              :profile_description,
-             :status
+             :status,
+             :created_at,
+             :updated_at
 
   has_many :provider_pictures
 end

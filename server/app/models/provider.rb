@@ -12,8 +12,8 @@ class Provider
   field :browse_description
   field :profile_description
   field :overall_rating, default: 0
-  #field :status, default: PENDING_APPROVAL
-  field :status, default: APPROVED
+  field :status, default: PENDING_APPROVAL
+  #field :status, default: APPROVED
 
   belongs_to :vendor
   embeds_many :provider_pictures
