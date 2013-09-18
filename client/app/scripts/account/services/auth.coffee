@@ -30,7 +30,7 @@ angular.module('account').service 'Auth',[
     @register = (user_type, auth_id, auth_provider, email, password, additional_fields) ->
       User.register(user_type, auth_id, auth_provider, email, password, additional_fields).then ( (response)=>
         if response.email_confirmation
-          $rootScope.notify_info 'An email has been sent to verify your email address.'
+          $rootScope.redirect_to '/', info: 'An email has been sent to verify your email address.'
         else
           @authenticate(user_type, auth_id, auth_provider, password, true)
       ), (response) ->
