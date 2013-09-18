@@ -32,7 +32,7 @@ DrawingBoard::Application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.sendmail_settings = {
       :location => `which sendmail`.strip!,
-      :arguments => '-i -t -f contactus@creativesatwork.me'
+      :arguments => '-i -t -f contactus@drawingboard.com'
   }
 
 =begin

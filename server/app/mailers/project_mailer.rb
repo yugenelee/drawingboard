@@ -1,5 +1,5 @@
 class ProjectMailer < ActionMailer::Base
-  default from: "contactus@creativesatwork.me"
+  default from: "contactus@drawingboard.com"
 
   #AdminEmail = 'felixsagitta@gmail.com, fannytham@creativesatwork.me, jaycetham@creativesatwork.me, melvinsng@creativesatwork.me'
   AdminEmail = 'felixsagitta@gmail.com'

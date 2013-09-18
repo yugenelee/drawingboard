@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "contactus@creativesatwork.me"
+  default from: "contactus@drawingboard.com"
 
   SiteUrl = 'http://162.243.15.77'
   #SiteUrl = 'http://localhost:3333'

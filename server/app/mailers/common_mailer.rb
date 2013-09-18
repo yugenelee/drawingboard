@@ -1,5 +1,5 @@
 class CommonMailer < ActionMailer::Base
-  default from: "contactus@creativesatwork.me"
+  default from: "contactus@drawingboard.com"
 
   SiteUrl = 'http://felix.creativesatwork.me'
 
