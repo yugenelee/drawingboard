@@ -44,21 +44,24 @@ angular.module('platform').controller 'ProviderCtrl', [
         ]
 
     $scope.openQuoteDialog = ->
-      $modal.open
-        templateUrl: 'dialogs/choose_services.dialog.html'
-        windowClass: 'modal'
-        controller: [
-          '$scope'
-          '$modalInstance'
-          ($scope, $modalInstance) ->
-            $scope.services = provider.services
-            $scope.selected_services = {}
-            $scope.cancel = ->
-              $modalInstance.close()
-            $scope.confirm = ->
-              angular.forEach $scope.selected_services, (checked, service) ->
-                Cart.add service, provider if checked
-              $modalInstance.close()
-        ]
+      if $scope.user_type == 'member'
+        $modal.open
+          templateUrl: 'dialogs/choose_services.dialog.html'
+          windowClass: 'modal'
+          controller: [
+            '$scope'
+            '$modalInstance'
+            ($scope, $modalInstance) ->
+              $scope.services = provider.services
+              $scope.selected_services = {}
+              $scope.cancel = ->
+                $modalInstance.close()
+              $scope.confirm = ->
+                angular.forEach $scope.selected_services, (checked, service) ->
+                  Cart.add service, provider if checked
+                $modalInstance.close()
+          ]
+      else
+        $scope.notify_info 'You need to login as member to request for quotes.'
 
 ]
