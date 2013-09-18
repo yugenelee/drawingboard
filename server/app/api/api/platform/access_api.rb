@@ -37,6 +37,7 @@ module Api
       crud :provider
       crud :service
       crud :event
+      crud :review
 
     end
   end

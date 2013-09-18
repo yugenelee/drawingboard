@@ -4,9 +4,11 @@ angular.module('platform').controller 'ProviderCtrl', [
   'service'
   '$modal'
   'Cart'
-  ($scope, provider, service, $modal, Cart) ->
+  'Review'
+  ($scope, provider, service, $modal, Cart, Review) ->
     $scope.provider = provider
     $scope.service = service
+    $scope.reviewFormOpened = false
     $scope.provider_pictures_pairs = []
     i = 0
     while i < $scope.provider.provider_pictures.length
@@ -14,6 +16,19 @@ angular.module('platform').controller 'ProviderCtrl', [
       second = $scope.provider.provider_pictures[i + 1]
       $scope.provider_pictures_pairs.push [first,second]
       i += 2
+
+    $scope.all_reviews_count = Review.count()
+    $scope.reviews = Review.all
+      conditions:
+        provider_id: provider.id
+    $scope.populateReviews = ->
+      $scope.reviews = Review.all
+        conditions:
+          provider_id: provider.id
+      $scope.all_reviews_count = Review.count()
+
+    $scope.$on 'repull_reviews', ->
+      $scope.populateReviews()
 
     $scope.openPictureDialog = (url) ->
       $modal.open

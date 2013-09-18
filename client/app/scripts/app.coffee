@@ -1,8 +1,14 @@
 angular.module 'config', []
+angular.module 'fork', []
+angular.module 'account', []
+angular.module 'dashboard', []
+angular.module 'pages', []
+angular.module 'platform', []
 
 angular.module 'common', [
   'ui.route'
   'config'
+  'fork'
   #'ngRoute'
   #'ngTouch'
   #'ngAnimate'
@@ -11,11 +17,6 @@ angular.module 'common', [
   'ui.bootstrap'
   'ui.select2'
 ]
-
-angular.module 'account', []
-angular.module 'dashboard', []
-angular.module 'pages', []
-angular.module 'platform', []
 
 angular.module 'app', [
   'config'

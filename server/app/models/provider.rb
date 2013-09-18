@@ -11,11 +11,13 @@ class Provider
   field :map_address
   field :browse_description
   field :profile_description
+  field :overall_rating, default: 0
   #field :status, default: PENDING_APPROVAL
   field :status, default: APPROVED
 
   belongs_to :vendor
   embeds_many :provider_pictures
+  has_many :reviews
   has_many :request_for_quotes
   has_and_belongs_to_many :services
 
