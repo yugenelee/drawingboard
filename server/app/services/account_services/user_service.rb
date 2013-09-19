@@ -62,6 +62,9 @@ module AccountServices
           fields.merge!(additional_fields)
           raise! USER_TYPE_NOT_ALLOWED unless USER_TYPES.include? user_type
           user = user_type.constantize.create! fields
+          if user.questions
+            UserMailer.send_questions_to_admin(user).deliver!
+          end
         end
         AuthAccount.create! auth_id: auth_id, auth_provider: auth_provider, user: user, user_type: user_type
         if policy[:require_email_confirmation]

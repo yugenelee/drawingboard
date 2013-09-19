@@ -2,14 +2,22 @@ angular.module('common').directive 'sidebar', [
   ->
     restrict: 'EA'
     replace: true
+    scope: {}
     templateUrl: 'partials/common/sidebar.html'
 
     controller: [
       '$scope'
+      '$rootScope'
       'Service'
-      ($scope, Service) ->
+      '$location'
+      ($scope, $rootScope, Service, $location) ->
         $scope.services = Service.all
           order: 'created_at ASC'
+        $scope.goTo = (service_name) ->
+          if $rootScope.authenticated
+            $location.path "/services/#{service_name}"
+          else
+            $rootScope.notify_info 'You need to login in order to view the listing.'
     ]
 
 ]

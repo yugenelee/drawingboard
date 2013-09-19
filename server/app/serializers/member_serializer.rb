@@ -16,6 +16,7 @@ class MemberSerializer < ActiveModel::Serializer
              :user_type,
              :first_name,
              :last_name,
+             :reached_by,
              :email,
              :has_password,
              :email_confirmed,

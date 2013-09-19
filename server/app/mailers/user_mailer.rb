@@ -2,6 +2,7 @@ class UserMailer < ActionMailer::Base
   default from: "contactus@drawingboard.com"
 
   SiteUrl = 'http://162.243.15.77'
+  AdminEmail = 'felixsagitta@gmail.com'
   #SiteUrl = 'http://localhost:3333'
 
   def activate_account(user, token)
@@ -19,5 +20,10 @@ class UserMailer < ActionMailer::Base
     attachments.inline['logo.png'] = File.read(File.join(Rails.root, 'assets/logo.png'))
     @reset_link = "#{SiteUrl}/#/account.reset_password/#{user.id}/#{token}"
     mail to: user.email, subject: 'Account reset password'
+  end
+
+  def send_questions_to_admin(user)
+    @user = user
+    mail to: AdminEmail, subject: 'New user has a question'
   end
 end

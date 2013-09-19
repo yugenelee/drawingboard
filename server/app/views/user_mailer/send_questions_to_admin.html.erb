@@ -1,0 +1,7 @@
+<p>Hi Admin,</p>
+
+<p>A new user <%= @user.first_name %> <%= @user.last_name %> asked:</p>
+
+<p><%= @user.questions %></p>
+
+<p>His/her email is <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>

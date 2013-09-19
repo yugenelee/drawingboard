@@ -22,6 +22,7 @@ angular.module('account').directive 'registerMemberForm', [
             additional_fields = {
               first_name: $scope.user.first_name,
               last_name: $scope.user.last_name,
+              reached_by: $scope.user.reached_by
             }
             Auth.register('Member', $scope.user.email, 'local', $scope.user.email, $scope.user.password, additional_fields)
           else

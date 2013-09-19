@@ -26,6 +26,7 @@ angular.module('account').directive 'registerVendorForm', [
                 role: $scope.user.vendor.role
                 mailing_address: $scope.user.vendor.mailing_address
                 acra_no: $scope.user.vendor.acra_no
+                questions: $scope.user.vendor.questions
 
               provider_fields =
                 name: $scope.user.provider.name

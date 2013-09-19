@@ -15,24 +15,27 @@ angular.module('common').service 'FormHandler', [
     
     @validate = (form_errors) ->
       window.scrollTo(0)
+      num_of_errors = 0
       angular.forEach form_errors, (val, key) ->
         angular.forEach val, (inner_val) ->
-          switch key
-            when 'required'
-              if inner_val.$error.required == true
-                $rootScope.notify_error "#{inner_val.$name?.humanize()} is missing." if inner_val.$name?
-              else if angular.isArray(inner_val.$error.required)
-                $rootScope.notify_error "#{inner_val.$error.required[0].$name.humanize()} is missing" if inner_val.$error.required[0].$name?
-            when 'email'
-              if inner_val.$error.email == true
-                $rootScope.notify_error "#{inner_val.$viewValue} is not a valid email." if inner_val.$viewValue?
-              else if angular.isArray(inner_val.$error.email)
-                $rootScope.notify_error "#{inner_val.$error.email[0].$viewValue} is not a valid email." if inner_val.$error.email[0].$viewValue?
-            when 'url'
-              if inner_val.$error.url == true
-                $rootScope.notify_error "#{inner_val.$viewValue} is not a valid url." if inner_val.$viewValue?
-              else if angular.isArray(inner_val.$error.url)
-                $rootScope.notify_error "#{inner_val.$error.url[0].$viewValue} is not a valid url." if inner_val.$error.url[0].$viewValue?
+          num_of_errors += 1
+          if num_of_errors < 4
+            switch key
+              when 'required'
+                if inner_val.$error.required == true
+                  $rootScope.notify_error "#{inner_val.$name?.humanize()} is missing." if inner_val.$name?
+                else if angular.isArray(inner_val.$error.required)
+                  $rootScope.notify_error "#{inner_val.$error.required[0].$name.humanize()} is missing" if inner_val.$error.required[0].$name?
+              when 'email'
+                if inner_val.$error.email == true
+                  $rootScope.notify_error "#{inner_val.$viewValue} is not a valid email." if inner_val.$viewValue?
+                else if angular.isArray(inner_val.$error.email)
+                  $rootScope.notify_error "#{inner_val.$error.email[0].$viewValue} is not a valid email." if inner_val.$error.email[0].$viewValue?
+              when 'url'
+                if inner_val.$error.url == true
+                  $rootScope.notify_error "#{inner_val.$viewValue} is not a valid url." if inner_val.$viewValue?
+                else if angular.isArray(inner_val.$error.url)
+                  $rootScope.notify_error "#{inner_val.$error.url[0].$viewValue} is not a valid url." if inner_val.$error.url[0].$viewValue?
 
     @handleImage = (scope, uploader_id, receiver, uploading_msg = "Uploading..", upload_failed_msg = "Failed to upload picture.") ->
       scope.$on 'fileupload:add', (e, data)->

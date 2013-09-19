@@ -3,6 +3,7 @@ class Member < User
 
   field :phone
   field :mobile
+  field :reached_by
   has_many :events
   has_many :reviews, inverse_of: :reviewer
   #has_and_belongs_to_many :votes, inverse_of: :voters

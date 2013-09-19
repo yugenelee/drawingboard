@@ -43,7 +43,10 @@ angular.module('account').run [
       $rootScope.attemptLogin {
         successHandler: (user) ->
           success_msg = if response.register then "Welcome to #{SiteName}!" else 'You are logged in!'
-          $rootScope.redirect_to "dashboard.#{user.user_type.toLowerCase()}.profile", success: success_msg
+          if $cookieStore.get('event_form')
+            $rootScope.redirect_to "event.new", success: "Welcome to #{SiteName}, you can now submit your event!"
+          else
+            $rootScope.redirect_to "dashboard.#{user.user_type.toLowerCase()}.profile", success: success_msg
       }
 
     $rootScope.attemptLogin()
