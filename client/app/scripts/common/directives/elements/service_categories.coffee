@@ -10,9 +10,6 @@ angular.module('common').directive 'serviceCategories', [
       '$location'
       ($scope, $rootScope, $location) ->
         $scope.goTo = (service_name) ->
-          if $rootScope.authenticated
-            $location.path "/services/#{service_name}"
-          else
-            $rootScope.notify_info 'You need to login in order to view the listing.'
+          $location.path "/services/#{service_name}"
     ]
 ]
