@@ -3,7 +3,8 @@ angular.module('account').run [
   'Auth'
   '$q'
   'SiteName'
-  ($rootScope, Auth, $q, SiteName) ->
+  '$cookieStore'
+  ($rootScope, Auth, $q, SiteName, $cookieStore) ->
 
     $rootScope.logout = ->
       Auth.logout()
