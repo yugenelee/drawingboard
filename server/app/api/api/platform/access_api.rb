@@ -3,6 +3,15 @@ module Api
     class AccessApi < Grape::API
       extend Api::Base
 
+      helpers do
+        def handle_error(e, params, status_code=500)
+          status(status_code)
+          {
+              message: e.message
+          }
+        end
+      end
+      
       resources 'events' do
         post 'save_form' do
           begin

@@ -6,7 +6,12 @@ module PlatformServices
     class << self
 
       def save_event_form(form_object)
-        event = event(form_object.id)
+        if form_object[:id]
+          event = event(form_object[:id])
+        else
+          event = Event.new
+          event.member_id = form_object[:member_id]
+        end
         event.alternate_contact_number = form_object[:alternate_contact_number]
         event.contact_email = form_object[:contact_email]
         event.date = form_object[:date]
@@ -22,7 +27,12 @@ module PlatformServices
       end
 
       def submit_event_form(form_object)
-        event = event(form_object.id)
+        if form_object[:id]
+          event = event(form_object[:id])
+        else
+          event = Event.new
+          event.member_id = form_object[:member_id]
+        end
         event.alternate_contact_number = form_object[:alternate_contact_number]
         event.contact_email = form_object[:contact_email]
         event.date = form_object[:date]

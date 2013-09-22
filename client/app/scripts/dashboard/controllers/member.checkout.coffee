@@ -46,13 +46,20 @@ angular.module('dashboard').controller 'DashboardMemberCheckoutCtrl', [
 
     init = ->
       FormHandler.formify $scope
-      Event.find($routeParams.event_id).then (obj) ->
-        $scope.form_object = obj
-        $scope.form_object.cart = Cart.get()
-        $scope.form_object.contact_email = $scope.current_user.email
+      if $routeParams.event_id
+        Event.find($routeParams.event_id).then (obj) ->
+          $scope.form_object = obj
+          $scope.form_object.cart = Cart.get()
+          $scope.form_object.contact_email = $scope.current_user.email
+          if angular.isUndefined $scope.form_object.questions
+            $scope.form_object.questions = {}
+      else
+        $scope.form_object =
+          member_id: $scope.current_user.id
+          cart: Cart.get()
+          contact_email: $scope.current_user.email
         if angular.isUndefined $scope.form_object.questions
           $scope.form_object.questions = {}
-
 
     init()
 
