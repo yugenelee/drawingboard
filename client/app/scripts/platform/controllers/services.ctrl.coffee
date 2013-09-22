@@ -4,31 +4,9 @@ angular.module('platform').controller 'ServicesCtrl', [
   '$modal'
   'Cart'
   '$location'
-  ($scope, service, $modal, Cart, $location) ->
+  'Provider'
+  ($scope, service, $modal, Cart, $location, Provider) ->
     $scope.service = service
-
-    $scope.openQuoteDialog = (provider)->
-      if $scope.user_type == 'member'
-        $modal.open
-          templateUrl: 'dialogs/choose_services.dialog.html'
-          windowClass: 'modal'
-          controller: [
-            '$scope'
-            '$modalInstance'
-            ($scope, $modalInstance) ->
-              $scope.services = provider.services
-              console.log provider
-              $scope.selected_services = {}
-              $scope.cancel = ->
-                $modalInstance.close()
-              $scope.confirm = ->
-                angular.forEach $scope.selected_services, (checked, service) ->
-                  Cart.add service, provider if checked
-                console.log Cart.get()
-                $modalInstance.close()
-          ]
-      else
-        $scope.notify_info 'You need to login as member to request for quotes.'
 
     $scope.goToDetailsPage = (provider_id)->
       if $scope.user_type == 'member'
@@ -36,4 +14,35 @@ angular.module('platform').controller 'ServicesCtrl', [
       else
         $scope.notify_info 'You need to login as member first to view details and request for quotes'
 
+    $scope.services_sort_by = (criteria) ->
+      $scope.query.order = criteria
+
+    $scope.refreshList = ->
+      Provider.count($scope.query).then ((count) ->
+        $scope.total_results = count
+        $scope.total_pages = Math.ceil(count/$scope.query.per_page)
+      ), ->
+        $scope.notify_error 'Unable to fetch count from server'
+      Provider.all($scope.query).then ((providers) ->
+        $scope.providers = providers
+      ), ->
+        $scope.notify_error 'Unable to fetch result from server'
+
+    init = ->
+      $scope.query =
+        order: 'created_at DESC'
+        page: 1
+        per_page: 5
+        any_in:
+          service_ids: [service.id]
+        conditions:
+          status: 'Approved'
+      $scope.$watch 'query', (new_value, old_value, scope) ->
+        if new_value.page == old_value.page
+          scope.query.page = 1
+        $scope.refreshList()
+      , true
+      $scope.refreshList()
+
+    init()
 ]

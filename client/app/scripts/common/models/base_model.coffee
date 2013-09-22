@@ -37,6 +37,7 @@ class BaseModel
     @before_operation {options}
     queries = {}
     queries.conditions = JSON.stringify(options.conditions) if options.conditions?
+    queries.any_in = JSON.stringify(options.any_in) if options.any_in?
     queries.search = options.search if options.search?
     promise = @Restangular.all(@pluralName).customGET('count', queries)
     if options.delegate? and options.delegate
@@ -65,6 +66,7 @@ class BaseModel
     queries.per_page = options.per_page if options.per_page?
     queries.includes = JSON.stringify(options.includes) if options.includes?
     queries.conditions = JSON.stringify(options.conditions) if options.conditions?
+    queries.any_in = JSON.stringify(options.any_in) if options.any_in?
     queries.search = options.search if options.search?
     promise = @Restangular.all(@pluralName).getList(queries)
     if options.delegate? and options.delegate

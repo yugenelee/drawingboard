@@ -10,14 +10,16 @@ module Api
         params do
           optional :search, desc: 'Full text search'
           optional :conditions, desc: 'A JSON formatted string of conditions'
+          optional :any_in
         end
         get 'count' do
           search = params[:search].blank?? '' : params[:search]
+          any_in = params[:any_in].blank?? {} : ActiveSupport::JSON.decode(params[:any_in]).symbolize_keys
           conditions = params[:conditions].blank?? {} : ActiveSupport::JSON.decode(params[:conditions]).symbolize_keys
           if search.blank?
-            entity_class.where(conditions).count
+            entity_class.where(conditions).any_in(any_in).count
           else
-            entity_class.full_text_search(search).where(conditions).count
+            entity_class.full_text_search(search).where(conditions).any_in(any_in).count
           end
         end
       end
@@ -31,6 +33,7 @@ module Api
         desc "Get all #{plural_resource_name}"
         params do
           optional :search, desc: 'Full text search'
+          optional :any_in
           optional :conditions, desc: 'A JSON formatted string of conditions'
           optional :order, desc: 'order by command such as "created_at DESC", multiple order by can be written as "created_at DESC, name ASC"'
           optional :limit
@@ -41,6 +44,7 @@ module Api
         end
         get do
           search = params[:search].blank?? '' : params[:search]
+          any_in = params[:any_in].blank?? {} : ActiveSupport::JSON.decode(params[:any_in]).symbolize_keys
           order = params[:order].blank?? 'created_at DESC' : params[:order]
           conditions = params[:conditions].blank?? {} : ActiveSupport::JSON.decode(params[:conditions]).symbolize_keys
           limit = params[:limit].blank?? 100 : params[:limit]
@@ -49,9 +53,9 @@ module Api
           per_page = params[:per_page].blank?? 100 : params[:per_page]
           includes = params[:includes].blank?? {} : ActiveSupport::JSON.decode(params[:includes]).symbolize_keys
           if search.blank?
-            entity_class.where(conditions).order_by(order).limit(limit).skip(offset).paginate(page: page, per_page: per_page).as_json includes
+            entity_class.where(conditions).any_in(any_in).order_by(order).limit(limit).skip(offset).paginate(page: page, per_page: per_page).as_json includes
           else
-            entity_class.full_text_search(search).where(conditions).order_by(order).limit(limit).skip(offset).paginate(page: page, per_page: per_page).as_json includes
+            entity_class.full_text_search(search).where(conditions).any_in(any_in).order_by(order).limit(limit).skip(offset).paginate(page: page, per_page: per_page).as_json includes
           end
         end
       end
