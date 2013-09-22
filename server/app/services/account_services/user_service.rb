@@ -62,7 +62,7 @@ module AccountServices
           fields.merge!(additional_fields)
           raise! USER_TYPE_NOT_ALLOWED unless USER_TYPES.include? user_type
           user = user_type.constantize.create! fields
-          if user.questions
+          if user_type == 'Vendor' && user.questions
             UserMailer.send_questions_to_admin(user).deliver!
           end
         end
