@@ -2,12 +2,14 @@ angular.module 'config', []
 angular.module 'fork', []
 angular.module 'account', []
 angular.module 'admin', []
-angular.module 'dashboard', []
+angular.module 'dashboard', ['ui.map']
 angular.module 'pages', []
 angular.module 'platform', []
 
 angular.module 'common', [
   'ui.route'
+  'ui.event'
+  'ui.map'
   'config'
   'fork'
   #'ngRoute'
@@ -28,6 +30,6 @@ angular.module 'app', [
   'pages'
   'platform'
 ]
-
-angular.element(document).ready ->
-  angular.bootstrap document, ['app']
+onGoogleReady = ->
+  angular.element(document).ready ->
+    angular.bootstrap document, ['app']

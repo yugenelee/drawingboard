@@ -60,8 +60,25 @@ angular.module('dashboard').directive 'listingForm', [
                 $scope.form_object.checked_services = {}
                 angular.forEach obj.services, (input) -> $scope.form_object.checked_services[input.id] = true
                 FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
+          $scope.mapOptions =
+            center: new google.maps.LatLng(1.3667, 103.8)
+            zoom: 12
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            streetViewControl: false
+            overviewMapControl: false
+            panControl: false
+            mapTypeControl: false
 
-
+          $scope.setLocationMarker = ($event, $params) ->
+            $scope.form_object.map_lat = $params[0].latLng.lat()
+            $scope.form_object.map_lng = $params[0].latLng.lng()
+            if angular.isUndefined $scope.locationMarker
+              $scope.locationMarker = new google.maps.Marker(
+                map: $scope.locationMap
+                position: $params[0].latLng
+              )
+            else
+              $scope.locationMarker.setPosition($params[0].latLng);
         init()
     ]
 ]

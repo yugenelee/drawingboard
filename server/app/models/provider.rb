@@ -9,6 +9,8 @@ class Provider
   field :name
   field :address
   field :map_address
+  field :map_lat
+  field :map_lng
   field :browse_description
   field :profile_description
   field :overall_rating, default: 0

@@ -3,6 +3,8 @@ class ProviderForServiceSerializer < ActiveModel::Serializer
              :name,
              :address,
              :map_address,
+             :map_lat,
+             :map_lng,
              :browse_description,
              :profile_description,
              :status,
