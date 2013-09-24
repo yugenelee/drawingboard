@@ -17,19 +17,37 @@ angular.module('platform').controller 'ProviderCtrl', [
       $scope.provider_pictures_pairs.push [first,second]
       i += 2
 
-    $scope.all_reviews_count = Review.count()
-    $scope.reviews = Review.all
+
+    ### REVIEWS ###
+    $scope.reviews_query =
+      order: 'created_at DESC'
+      page: 1
+      per_page: 2
       conditions:
         provider_id: provider.id
+
     $scope.populateReviews = ->
-      $scope.reviews = Review.all
-        conditions:
-          provider_id: provider.id
       $scope.all_reviews_count = Review.count()
+      Review.count($scope.reviews_query).then ((count) ->
+        $scope.total_review_results = count
+        $scope.total_review_pages = Math.ceil(count/$scope.reviews_query.per_page)
+      ), ->
+        $scope.notify_error 'Unable to fetch count from server'
+      Review.all($scope.reviews_query).then ((reviews) ->
+        $scope.reviews = reviews
+      ), ->
+        $scope.notify_error 'Unable to fetch result from server'
 
     $scope.$on 'repull_reviews', ->
       $scope.populateReviews()
 
+    $scope.$watch 'reviews_query', (new_value, old_value, scope) ->
+      if new_value.page == old_value.page
+        scope.reviews_query.page = 1
+      $scope.populateReviews()
+    , true
+
+    ### DIALOGS ###
     $scope.openPictureDialog = (url) ->
       $modal.open
         templateUrl: 'dialogs/provider_picture.dialog.html'
