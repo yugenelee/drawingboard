@@ -42,7 +42,7 @@ angular.module('account').service 'Auth',[
         provider_fields.vendor_id = response.user.id
         Provider.create provider_fields
         if response.email_confirmation
-          $rootScope.notify_info 'An email has been sent to verify your email address.'
+          $rootScope.redirect_to '/', info: 'An email has been sent to verify your email address.'
         else
           @authenticate('Vendor', auth_id, auth_provider, password, true)
       ), (response) ->

@@ -78,7 +78,7 @@ angular.module('dashboard').directive 'listingForm', [
                 position: $params[0].latLng
               )
             else
-              $scope.locationMarker.setPosition($params[0].latLng);
+              $scope.locationMarker.setPosition($params[0].latLng)
         init()
     ]
 ]

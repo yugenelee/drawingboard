@@ -57,6 +57,26 @@ angular.module('account').directive 'registerVendorForm', [
           $scope.user.provider.checked_services = {}
           $scope.services = Service.all
             order: 'created_at ASC'
+
+          $scope.mapOptions =
+            center: new google.maps.LatLng(1.3667, 103.8)
+            zoom: 12
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            streetViewControl: false
+            overviewMapControl: false
+            panControl: false
+            mapTypeControl: false
+
+          $scope.setLocationMarker = ($event, $params) ->
+            $scope.form_object.map_lat = $params[0].latLng.lat()
+            $scope.form_object.map_lng = $params[0].latLng.lng()
+            if angular.isUndefined $scope.locationMarker
+              $scope.locationMarker = new google.maps.Marker(
+                map: $scope.locationMap
+                position: $params[0].latLng
+              )
+            else
+              $scope.locationMarker.setPosition($params[0].latLng)
         init()
     ]
 ]
