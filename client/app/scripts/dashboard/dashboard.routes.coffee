@@ -10,7 +10,7 @@ angular.module('dashboard').config [
     .when('dashboard.vendor.listing', omitController: true)
     .when('dashboard.vendor.profile')
     .when('dashboard.member.events', omitController: true)
-    .when('dashboard.member.cart')
+    .when('dashboard.member.cart', user: false)
     .when('dashboard.member.checkout/:event_id')
     .when('dashboard.member.profile')
     .when('listing.new', omitController: true)

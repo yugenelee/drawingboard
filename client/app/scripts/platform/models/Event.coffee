@@ -9,6 +9,10 @@ angular.module('platform').factory 'Event', [
         @before_operation form_object
         Restangular.all('events').customPOST 'save_form', {}, {}, form_object
 
+      submit_event_form_and_register: (form_object) ->
+        @before_operation form_object
+        Restangular.all('events').customPOST 'submit_event_form_and_register', {}, {}, form_object
+
       submit_form: (form_object) ->
         @before_operation form_object
         Restangular.all('events').customPOST 'submit_form', {}, {}, form_object

@@ -62,7 +62,7 @@ angular.module('platform').controller 'ProviderCtrl', [
         ]
 
     $scope.openQuoteDialog = ->
-      if $scope.user_type == 'member'
+      if $scope.user_type != 'vendor'
         $modal.open
           templateUrl: 'dialogs/choose_services.dialog.html'
           windowClass: 'modal'
@@ -81,6 +81,6 @@ angular.module('platform').controller 'ProviderCtrl', [
                 $modalInstance.close()
           ]
       else
-        $scope.notify_info 'You need to login as member to request for quotes.'
+        $scope.notify_info 'Vendor cannot request quotes from other vendors.'
 
 ]
