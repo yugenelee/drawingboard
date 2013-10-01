@@ -21,6 +21,14 @@ module Api
           end
         end
 
+        post 'submit_event_form_and_register' do
+          begin
+            PlatformServices::Activities.submit_event_form_and_register params
+          rescue PlatformServices::Exceptions::Exception => e
+            handle_error e, params, 404
+          end
+        end
+
         post 'submit_form' do
           begin
             PlatformServices::Activities.submit_event_form params

@@ -63,7 +63,7 @@ module AccountServices
           raise! USER_TYPE_NOT_ALLOWED unless USER_TYPES.include? user_type
           user = user_type.constantize.create! fields
           if user_type == 'Vendor' && user.questions
-            UserMailer.send_questions_to_admin(user).deliver!
+            UserMailer.delay.send_questions_to_admin(user)
           end
         end
         AuthAccount.create! auth_id: auth_id, auth_provider: auth_provider, user: user, user_type: user_type
