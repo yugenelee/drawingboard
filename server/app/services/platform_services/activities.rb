@@ -51,7 +51,7 @@ module PlatformServices
         end
         rfq.each do |provider_id, value|
           provider = Provider.find provider_id
-          ProjectMailer.delay.send_request_for_quote(event, provider)
+          ProjectMailer.delay.send_request_for_quote(event.id, provider.id)
         end
       end
 
@@ -83,7 +83,7 @@ module PlatformServices
         end
         rfq.each do |provider_id, value|
           provider = Provider.find provider_id
-          ProjectMailer.delay.send_request_for_quote(event, provider)
+          ProjectMailer.delay.send_request_for_quote(event.id, provider.id)
         end
       end
     end

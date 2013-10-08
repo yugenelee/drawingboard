@@ -8,6 +8,6 @@ class CommonMailer < ActionMailer::Base
 
   def contact_us(name_value_hash)
     @name_value_hash = name_value_hash
-    mail to: 'tioh.wei.lun99@nus.edu.sg, contactus@creativesatwork.me', subject: 'Contact Us Enquiry'
+    mail to: 'tioh.wei.lun99@nus.edu.sg', subject: 'Contact Us Enquiry'
   end
 end

@@ -6,12 +6,12 @@ module AccountServices
     class << self
       def send_confirmation_email(user)
         session = EmailSession.create_from_user!(user, ACTIVATE_USER)
-        UserMailer.delay.activate_account(user, session.token)
+        UserMailer.delay.activate_account(user.id, session.token)
       end
 
       def request_password_reset(user)
         session = EmailSession.create_from_user!(user, RESET_PASSWORD)
-        UserMailer.delay.reset_password(user, session.token)
+        UserMailer.delay.reset_password(user.id, session.token)
       end
 
       def perform_operation(user_id, token, ip_address, payload={})
