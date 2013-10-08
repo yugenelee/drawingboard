@@ -7,5 +7,13 @@ angular.module('pages').config [
     .when('home')
     .when('about', omitController: true)
     .when('contact')
-    #.when('home', resolves: ['projects'])
+    .when('faq', omitController: true)
+    .when('terms', omitController: true)
+    .when('privacy', omitController: true)
+    .when('blog', omitController: true)
+    .when('why_list_our_business', omitController: true)
+    .when('advertise', omitController: true)
+    .when('newsletter', omitController: true)
+
+  #.when('home', resolves: ['projects'])
 ]

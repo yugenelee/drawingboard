@@ -16,6 +16,8 @@ angular.module('dashboard').directive 'listingForm', [
       'Service'
       ($scope, $rootScope, $routeParams, FormHandler, Entity, Service) ->
 
+        geocoder = new google.maps.Geocoder()
+
         $scope.submitForm = ->
           $scope.submitted = true
           if $scope.terms_and_conditions
@@ -43,6 +45,20 @@ angular.module('dashboard').directive 'listingForm', [
           else
             $rootScope.notify_info 'Please check that you have read the terms and conditions'
 
+        $scope.setAsMapAddress = ->
+          $scope.form_object.map_address = $scope.suggested_address
+
+        $scope.findCoordinate = ($event) ->
+          console.log $scope.form_object.map_address
+          geocoder.geocode
+            address: $scope.form_object.map_address
+          , (results, status) ->
+            if status is google.maps.GeocoderStatus.OK
+              $scope.locationMap.setCenter results[0].geometry.location
+              $scope.locationMap.setZoom 14
+            else
+              console.log "Geocode was not successful for the following reason: " + status
+
         init = ->
           FormHandler.formify $scope
           $scope.services = Service.all()
@@ -60,6 +76,7 @@ angular.module('dashboard').directive 'listingForm', [
                 $scope.form_object.checked_services = {}
                 angular.forEach obj.services, (input) -> $scope.form_object.checked_services[input.id] = true
                 FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
+
           $scope.mapOptions =
             center: new google.maps.LatLng(1.3667, 103.8)
             zoom: 12
@@ -79,6 +96,17 @@ angular.module('dashboard').directive 'listingForm', [
               )
             else
               $scope.locationMarker.setPosition($params[0].latLng)
+            geocoder.geocode
+              latLng: $params[0].latLng
+            , (results, status) ->
+              if status is google.maps.GeocoderStatus.OK
+                if results[0]
+                  $scope.suggested_address = results[0].formatted_address
+                else
+                  console.log "No results found for geocoding latlng"
+              else
+                console.log "Geocoder failed due to: " + status
+
         init()
     ]
 ]

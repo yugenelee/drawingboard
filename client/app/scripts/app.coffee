@@ -9,6 +9,7 @@ angular.module 'platform', []
 angular.module 'common', [
   'ui.route'
   'ui.event'
+  'ui.keypress'
   'ui.map'
   'config'
   'fork'
