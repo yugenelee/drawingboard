@@ -5,7 +5,14 @@ angular.module('platform').controller 'ProviderCtrl', [
   '$modal'
   'Cart'
   'Review'
-  ($scope, provider, service, $modal, Cart, Review) ->
+  '$location'
+  '$anchorScroll'
+  ($scope, provider, service, $modal, Cart, Review, $location, $anchorScroll) ->
+
+    $scope.goToReviews = ->
+      $location.hash('listing-reviews')
+      $anchorScroll()
+
     $scope.provider = provider
     $scope.service = service
     $scope.reviewFormOpened = false
@@ -22,7 +29,7 @@ angular.module('platform').controller 'ProviderCtrl', [
     $scope.reviews_query =
       order: 'created_at DESC'
       page: 1
-      per_page: 2
+      per_page: 3
       conditions:
         provider_id: provider.id
 
