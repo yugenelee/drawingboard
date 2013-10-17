@@ -4,5 +4,5 @@ class RequestForQuote
 
   belongs_to :provider
   belongs_to :event
-  has_many :request_for_quote_categories
+  field :question  
 end

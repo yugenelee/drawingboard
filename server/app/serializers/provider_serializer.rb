@@ -50,6 +50,6 @@ class ProviderSerializer < ActiveModel::Serializer
   has_one :vendor, serializer: VendorForProviderSerializer
   has_many :provider_pictures
   has_many :reviews, serializer: ReviewForProviderSerializer
-  has_many :services
-
+  #has_many :services
+  has_one :service
 end

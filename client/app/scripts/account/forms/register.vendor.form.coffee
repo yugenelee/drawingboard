@@ -38,10 +38,6 @@ angular.module('account').directive 'registerVendorForm', [
                 profile_description: $scope.user.provider.profile_description
                 provider_pictures: $scope.user.provider.provider_pictures
 
-              provider_fields.service_ids = []
-              angular.forEach $scope.user.provider.checked_services, (checked, id) ->
-                provider_fields.service_ids.push(id) if checked
-
               Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
             else
               FormHandler.validate $scope.form.$error
@@ -51,16 +47,36 @@ angular.module('account').directive 'registerVendorForm', [
         $scope.setAsMapAddress = ->
           $scope.user.provider.map_address = $scope.suggested_address
 
-        $scope.findCoordinate = ($event) ->
-          console.log $scope.user.provider.map_address
+        $scope.findCoordinate = ($event=null) ->
+          console.log $scope.coord_zipcode
+          if $event
+            $event.preventDefault()
           geocoder.geocode
-            address: $scope.user.provider.map_address
+            address: $scope.coord_zipcode + ' Singapore'
           , (results, status) ->
               if status is google.maps.GeocoderStatus.OK
                 $scope.locationMap.setCenter results[0].geometry.location
                 $scope.locationMap.setZoom 14
+                if angular.isUndefined $scope.locationMarker
+                  $scope.locationMarker = new google.maps.Marker(
+                    map: $scope.locationMap
+                    position: results[0].geometry.location
+                  )
+                else
+                  $scope.locationMarker.setPosition(results[0].geometry.location)
+                geocoder.geocode
+                  latLng: results[0].geometry.location
+                , (gresults, status) ->
+                  if status is google.maps.GeocoderStatus.OK
+                    if results[0]
+                      $scope.suggested_address = gresults[0].formatted_address
+                    else
+                      console.log "No results found for geocoding latlng"
+                  else
+                    console.log "Geocoder failed due to: " + status
               else
                 console.log "Geocode was not successful for the following reason: " + status
+          false
 
 
         init = ->
@@ -70,7 +86,6 @@ angular.module('account').directive 'registerVendorForm', [
             provider:
               provider_pictures: []
           FormHandler.handleImage($scope, 'provider_picture', $scope.user.provider.provider_pictures)
-          $scope.user.provider.checked_services = {}
           $scope.services = Service.all
             order: 'created_at ASC'
 

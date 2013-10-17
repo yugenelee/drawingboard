@@ -25,7 +25,6 @@ angular.module('platform').factory 'Cart',[
         delete @cart[service_name][provider_id]
         if Object.keys(@cart[service_name]).length == 1
           delete @cart[service_name]
-        else
         $cookieStore.put 'CartSession', @get()
 
       destroy: ->

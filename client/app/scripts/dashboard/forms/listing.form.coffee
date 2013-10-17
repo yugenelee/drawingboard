@@ -24,11 +24,6 @@ angular.module('dashboard').directive 'listingForm', [
             if $scope.form.$valid
               $rootScope.clear_notifications()
 
-              $scope.form_object.service_ids = []
-              angular.forEach $scope.form_object.checked_services, (checked, id) ->
-                $scope.form_object.service_ids.push(id) if checked
-              delete $scope.form_object.services
-
               switch $scope.type
                 when 'new'
                   promise = Entity.create $scope.form_object, notify_success: false
@@ -48,16 +43,36 @@ angular.module('dashboard').directive 'listingForm', [
         $scope.setAsMapAddress = ->
           $scope.form_object.map_address = $scope.suggested_address
 
-        $scope.findCoordinate = ($event) ->
-          console.log $scope.form_object.map_address
+        $scope.findCoordinate = ($event=null) ->
+          console.log $scope.coord_zipcode
+          if $event
+            $event.preventDefault()
           geocoder.geocode
-            address: $scope.form_object.map_address
+            address: $scope.coord_zipcode + ' Singapore'
           , (results, status) ->
             if status is google.maps.GeocoderStatus.OK
               $scope.locationMap.setCenter results[0].geometry.location
               $scope.locationMap.setZoom 14
+              if angular.isUndefined $scope.locationMarker
+                $scope.locationMarker = new google.maps.Marker(
+                  map: $scope.locationMap
+                  position: results[0].geometry.location
+                )
+              else
+                $scope.locationMarker.setPosition(results[0].geometry.location)
+              geocoder.geocode
+                latLng: results[0].geometry.location
+              , (gresults, status) ->
+                if status is google.maps.GeocoderStatus.OK
+                  if results[0]
+                    $scope.suggested_address = gresults[0].formatted_address
+                  else
+                    console.log "No results found for geocoding latlng"
+                else
+                  console.log "Geocoder failed due to: " + status
             else
               console.log "Geocode was not successful for the following reason: " + status
+          false
 
         init = ->
           FormHandler.formify $scope
@@ -67,14 +82,11 @@ angular.module('dashboard').directive 'listingForm', [
               $scope.form_object =
                 vendor_id: $scope.user.id
                 provider_pictures: []
-                checked_services: {}
               FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
 
             when 'edit'
               Entity.find($routeParams.id).then (obj) ->
                 $scope.form_object = obj
-                $scope.form_object.checked_services = {}
-                angular.forEach obj.services, (input) -> $scope.form_object.checked_services[input.id] = true
                 FormHandler.handleImage($scope, 'provider_picture', $scope.form_object.provider_pictures)
 
           $scope.mapOptions =

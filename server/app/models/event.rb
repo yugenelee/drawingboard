@@ -20,5 +20,4 @@ class Event
 
   belongs_to :member
   has_many :request_for_quotes
-
 end
