@@ -18,6 +18,7 @@ class Provider
   #field :status, default: APPROVED
 
   belongs_to :vendor
+  belongs_to :priceplan
   embeds_many :provider_pictures
   has_many :reviews
   has_many :request_for_quotes

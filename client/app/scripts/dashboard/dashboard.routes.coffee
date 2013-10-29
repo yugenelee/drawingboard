@@ -13,6 +13,7 @@ angular.module('dashboard').config [
     .when('dashboard.member.cart', user: false)
     .when('dashboard.member.checkout/:event_id')
     .when('dashboard.member.profile')
+    .when('dashboard.payment')
     .when('listing.new', omitController: true)
     .when('listing.edit/:id', omitController: true)
     .when('event.new', omitController: true)

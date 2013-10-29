@@ -52,4 +52,5 @@ class ProviderSerializer < ActiveModel::Serializer
   has_many :reviews, serializer: ReviewForProviderSerializer
   #has_many :services
   has_one :service
+  has_one :priceplan
 end

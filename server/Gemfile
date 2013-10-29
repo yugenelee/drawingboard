@@ -11,6 +11,8 @@ gem 'will_paginate_mongoid'
 gem "sidekiq"
 
 gem 'active_model_serializers'
+#gem 'paypal-sdk-rest'
+gem 'activemerchant'
 
 gem 'grape'
 gem 'grape-swagger'

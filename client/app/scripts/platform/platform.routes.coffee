@@ -8,4 +8,6 @@ angular.module('platform').config [
     .when('services/:service_name', resolves: ['service'])
     .when('provider/:id', resolves: ['provider', 'service'])
     .when('provider/:id/:service_name', resolves: ['provider', 'service'])
+    .when('paypal_success')
+    .when('paypal_cancelled')
 ]

@@ -10,6 +10,8 @@ angular.module('common').directive 'alerter', [
       ($scope, $timeout) ->
         $scope.alerts = []
 
+        $.pnotify.defaults.history = false;
+
         stack_topright =
           dir1: "down"
           dir2: "left"

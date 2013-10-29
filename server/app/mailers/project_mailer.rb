@@ -1,5 +1,5 @@
 class ProjectMailer < ActionMailer::Base
-  default from: "contactus@drawingboard.com"
+  default from: "admin@drawingboard.com"
 
   AdminEmail = 'felixsagitta@gmail.com'
   SiteUrl = 'http://162.243.15.77'

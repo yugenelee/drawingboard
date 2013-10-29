@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "contactus@drawingboard.com"
+  default from: "admin@drawingboard.com"
 
   SiteUrl = 'http://162.243.15.77'
   AdminEmail = 'felixsagitta@gmail.com'

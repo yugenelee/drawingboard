@@ -11,7 +11,14 @@ angular.module('account').directive 'registerVendorForm', [
       'Service'
       'FormHandler'
       'Auth'
-      ($scope, $rootScope, $routeParams, Service, FormHandler, Auth) ->
+      '$location'
+      'MemoryStore'
+      ($scope, $rootScope, $routeParams, Service, FormHandler, Auth, $location, MemoryStore) ->
+
+        pricingplan = MemoryStore.get('pricingplan')
+
+        if not pricingplan
+          $location.path 'account.pricing'
 
         geocoder = new google.maps.Geocoder()
 
@@ -37,6 +44,7 @@ angular.module('account').directive 'registerVendorForm', [
                 browse_description: $scope.user.provider.browse_description
                 profile_description: $scope.user.provider.profile_description
                 provider_pictures: $scope.user.provider.provider_pictures
+                priceplan: pricingplan
 
               Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
             else

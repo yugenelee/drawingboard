@@ -6,6 +6,5 @@ class Service
   field :name
   field :display_name
 
-  has_many :request_for_quote_categories
   has_many :providers
 end

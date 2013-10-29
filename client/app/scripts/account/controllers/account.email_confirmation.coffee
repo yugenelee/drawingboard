@@ -19,7 +19,10 @@ angular.module('account').controller 'AccountEmailConfirmationCtrl', [
 
     $scope.$on 'session:created', (ev, user) ->
       $scope.attemptLogin().then ( ->
-        $scope.redirect_to "dashboard.#{user.user_type.toLowerCase()}.profile", success: 'Please proceed to furnish your account information'
+        if user.user_type == 'Vendor'
+          $scope.redirect_to "dashboard.payment", success: 'Please proceed to make your payment.'
+        else
+          $scope.redirect_to "dashboard.#{user.user_type.toLowerCase()}.profile", success: 'Please proceed to furnish your account information'
       ), ->
         $scope.notify_error 'Unable to log you in'
 ]
