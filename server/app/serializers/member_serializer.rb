@@ -24,6 +24,7 @@ class MemberSerializer < ActiveModel::Serializer
              :phone,
              :mobile,
              :reviews_wrote,
+             :last_login,
              :created_at,
              :updated_at
 

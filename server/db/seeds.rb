@@ -20,3 +20,11 @@ categories.each do |name, display_name|
 end
 
 AccountServices::UserService.register('Admin','admin@drawingboard.com', 'local', 'admin@drawingboard.com', 'pass1234', {first_name: 'DrawingBoard', last_name: 'Admin'})
+admin = User.where(email: 'admin@drawingboard.com').first
+admin.email_confirmed = true
+admin.save!
+
+
+Priceplan.create! name: 'Basic', description: 'Basic', code: 'basic', price: '0'
+Priceplan.create! name: 'Basic Plus', description: 'Basic Plus', code: 'basicplus', price: '59'
+Priceplan.create! name: 'Premium', description: 'Premium', code: 'premium', price: '269'

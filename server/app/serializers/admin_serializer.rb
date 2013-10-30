@@ -8,6 +8,7 @@ class AdminSerializer < ActiveModel::Serializer
              :has_password,
              :email_confirmed,
              :account_status,
+             :last_login,
              :created_at,
              :updated_at
 

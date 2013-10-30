@@ -19,6 +19,7 @@ class User
   field :has_password, type: Boolean, default: false
   field :email_confirmed, type: Boolean, default: false
   field :account_status, default: ACCOUNT_ACTIVE
+  field :last_login, type: DateTime
 
   validates_presence_of :has_password, :first_name, :last_name
 

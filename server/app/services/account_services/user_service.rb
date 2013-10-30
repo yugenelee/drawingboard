@@ -38,6 +38,8 @@ module AccountServices
           user.session.destroy
           raise! TOKEN_EXPIRED
         end
+        user.last_login = Time.now
+        user.save!
         user.as_json
       end
 

@@ -14,6 +14,7 @@ class VendorSerializer < ActiveModel::Serializer
              :acra_no,
              :mailing_address,
              :questions,
+             :last_login,
              :created_at,
              :updated_at
 
