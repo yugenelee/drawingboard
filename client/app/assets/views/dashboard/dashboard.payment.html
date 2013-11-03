@@ -1,24 +1,24 @@
 <div class="main-container">
-  <div id="main-content" class="container">
-    <div class="row">
-      <div class="span12">
-        <div class="row">
-          <div class="span12">
-            <div class="content-main">
-              <h3>Listing</h3>
-              <table class="admin-table table table-bordered table-condensed table-striped table-hover">
-                <tr>
-                  <th>Listing name</th>
-                  <th>59/year</th>
-                </tr>
-                <tr>
-                  <td>Discount Code: <input /></td>
-                  <td><a href>Pay</a></td>
-                </tr>
-              </table>
-              <hr>
-            </div>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span8 offset2 box_con">
+        <div class=" text-center">
+          <h2 class="box_title">Checkout</h2>
+          <h4>You have selected the <a class="orange1" href="">{{ provider.priceplan.name }}</a> plan</h4>
+          <h4>Total: <!--<span class="text-slash">$59.00</span>--> <span class="orange1">${{provider.priceplan.price}}</span></h4>
+<!--
+
+          <div class="">
+            <div class="">Coupon code</div>
+
+            <input type="text" class="span3" placeholder="">
           </div>
+
+          <p>You have been entitled to 10% discount for this plan</p>-->
+          <div class="clearfix"></div>
+          <hr>
+          <a href ng-click="pay()" class="paypal-btn btn button-paypal">Checkout using <img src="styles/img/paypal-button.png"></a>
+
         </div>
       </div>
     </div>

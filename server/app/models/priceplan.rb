@@ -12,6 +12,6 @@ class Priceplan
 
   field :code
   field :name
-  field :price
+  field :price, type: BigDecimal
   field :description
 end

@@ -1,27 +1,15 @@
 angular.module('dashboard').controller 'DashboardPaymentCtrl', [
   '$scope'
-  '$rootScope'
-  'FormHandler'
-  ($scope, $rootScope, FormHandler) ->
+  'provider'
+  'Payment'
+  ($scope, provider, Payment) ->
 
-    $scope.hasError = (input) ->
-      !input.$valid && (input.$dirty || $scope.submitted)
+    $scope.provider = provider
 
-    $scope.submitForm = ->
-      $scope.submitted = true
-      if $scope.form.$valid
-        $scope.clear_notifications()
-        $rootScope.current_user.put().then ((current_user)->
-          $rootScope.current_user = current_user
-          $scope.notify_success 'Your profile is updated successfully'
-        ), ->
-          window.scrollTo(0)
-          $scope.notify_error 'Form has missing or invalid values'
-      else
-        FormHandler.validate $scope.form.$error
-
-    init = ->
-      $scope.submitted = false
-    init()
+    $scope.pay = ->
+      Payment.paypal_link(provider.id, provider.priceplan.id).then (res) ->
+        console.log(res)
+        if res.status == 'SUCCESS'
+          window.location = res.paypal_url
 
 ]

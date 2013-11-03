@@ -32,16 +32,16 @@ module PaymentServices
             quantity: 1,         # quantity
             amount: payment_in_cents  # unit price
         }
-        options = {
+        credentials = {
             :login => "felixs_1313060608_biz_api1.gmail.com",
             :password => "1313060648",
             :signature => "A6ZwSplvM51wI9C4jWCOqGE.tovkAXnUkzrTM7uWjWFnEaZsFvZ3XjwK"
         }
         ActiveMerchant::Billing::Base.mode = :test
-        gateway = ActiveMerchant::Billing::PaypalExpressGateway.new(options)
+        gateway = ActiveMerchant::Billing::PaypalExpressGateway.new(credentials)
         response = gateway.setup_purchase(payment_in_cents,options)
         if response.success?
-          payment.token = response.token
+          payment.pp_token = response.token
           response = {
               status: SUCCESS,
               paypal_url: gateway.redirect_url_for(response.token)
@@ -60,30 +60,45 @@ module PaymentServices
         payment = payment_from_token(token)
         if payment.paid?
           {
-              status: ALREADY_PAID
+              status: 'ALREADY_PAID'
           }
         else
           payment.payer_id = payer_id #params[:PayerID]
           payment_in_cents = payment.cents
+          credentials = {
+              :login => "felixs_1313060608_biz_api1.gmail.com",
+              :password => "1313060648",
+              :signature => "A6ZwSplvM51wI9C4jWCOqGE.tovkAXnUkzrTM7uWjWFnEaZsFvZ3XjwK"
+          }
+          ActiveMerchant::Billing::Base.mode = :test
+          gateway = ActiveMerchant::Billing::PaypalExpressGateway.new(credentials)
           response = gateway.purchase(payment_in_cents,
                                       :ip => payment.ip_address,
                                       :token => token,
                                       :payer_id => payer_id,
                                       :currency => 'SGD'
           )
+          p "================"
+          p response
+          p "================"
           if response.success?
             payment.paid_at = Time.now
+            payment.status = Payment::PAYMENT_SUCCESS
             payment.save!
             provider = payment.provider
             provider.priceplan = payment.priceplan
+            provider.status = Provider::PENDING_APPROVAL
+            provider.expiry = Date.today.next_year
             provider.save!
             {
-                status: 'PAYMENT SUCCESS',
+                status: 'PAYMENT_SUCCESS',
                 provider: provider.as_json
             }
           else
+            payment.status = Payment::PAYMENT_FAILED
+            payment.save!
             {
-                status: 'PAYMENT FAILED',
+                status: 'PAYMENT_FAILED',
                 error: 'Payment failed. You have not been charged.'
             }
           end

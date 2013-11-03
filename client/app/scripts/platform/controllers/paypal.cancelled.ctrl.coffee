@@ -1,6 +1,6 @@
 angular.module('platform').controller 'PaypalCancelledCtrl', [
   '$scope'
   'Payment'
-  ($scope, Payment) ->
-    $scope.message = ''
+  ($scope) ->
+    $scope.redirect_to '/', error: 'Unable to complete payment.'
 ]

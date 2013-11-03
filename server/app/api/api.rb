@@ -48,8 +48,8 @@ module Api
     mount Api::AccountManagement::UserApi # ordering is important! because of users/:id and users/authenticate
     mount Api::Platform::InfoApi
     mount Api::Platform::AccessApi
-    mount Api::Payment::EntityApi
     mount Api::Payment::PaypalApi
+    mount Api::Payment::EntityApi
 
     add_swagger_documentation(
         mount_path: 'apidocs',

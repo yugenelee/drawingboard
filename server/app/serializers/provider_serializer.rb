@@ -36,10 +36,10 @@ end
 class ProviderSerializer < ActiveModel::Serializer
   attributes :id,
              :name,
-             :address,
              :map_address,
              :map_lat,
              :map_lng,
+             :expiry,
              :browse_description,
              :profile_description,
              :overall_rating,

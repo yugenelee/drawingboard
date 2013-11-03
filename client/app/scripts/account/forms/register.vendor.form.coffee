@@ -13,7 +13,8 @@ angular.module('account').directive 'registerVendorForm', [
       'Auth'
       '$location'
       'MemoryStore'
-      ($scope, $rootScope, $routeParams, Service, FormHandler, Auth, $location, MemoryStore) ->
+      'Priceplan'
+      ($scope, $rootScope, $routeParams, Service, FormHandler, Auth, $location, MemoryStore, Priceplan) ->
 
         pricingplan = MemoryStore.get('pricingplan')
 
@@ -37,16 +38,24 @@ angular.module('account').directive 'registerVendorForm', [
                 acra_no: $scope.user.vendor.acra_no
                 questions: $scope.user.vendor.questions
 
-              provider_fields =
-                name: $scope.user.provider.name
-                address: $scope.user.provider.address
-                map_address: $scope.user.provider.map_address
-                browse_description: $scope.user.provider.browse_description
-                profile_description: $scope.user.provider.profile_description
-                provider_pictures: $scope.user.provider.provider_pictures
-                priceplan: pricingplan
+              planSelector =
+                conditions:
+                  code: pricingplan
+              Priceplan.all(planSelector).then (res) ->
+                provider_fields =
+                  name: $scope.user.provider.name
+                  map_address: $scope.user.provider.map_address
+                  map_lat: $scope.user.provider.map_lat
+                  map_lng: $scope.user.provider.map_lng
+                  browse_description: $scope.user.provider.browse_description
+                  profile_description: $scope.user.provider.profile_description
+                  provider_pictures: $scope.user.provider.provider_pictures
+                  service_id: $scope.user.provider.service_id
+                  priceplan_id: res[0].id
 
-              Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
+                console.log provider_fields
+
+                Auth.register_vendor($scope.user.vendor.email, 'local', $scope.user.vendor.email, $scope.user.vendor.password, additional_fields, provider_fields)
             else
               FormHandler.validate $scope.form.$error
           else
@@ -65,6 +74,8 @@ angular.module('account').directive 'registerVendorForm', [
               if status is google.maps.GeocoderStatus.OK
                 $scope.locationMap.setCenter results[0].geometry.location
                 $scope.locationMap.setZoom 14
+                $scope.user.provider.map_lat = results[0].geometry.location.lat()
+                $scope.user.provider.map_lng = results[0].geometry.location.lng()
                 if angular.isUndefined $scope.locationMarker
                   $scope.locationMarker = new google.maps.Marker(
                     map: $scope.locationMap
@@ -107,8 +118,9 @@ angular.module('account').directive 'registerVendorForm', [
             mapTypeControl: false
 
           $scope.setLocationMarker = ($event, $params) ->
-            $scope.form_object.map_lat = $params[0].latLng.lat()
-            $scope.form_object.map_lng = $params[0].latLng.lng()
+            $scope.user.provider.map_lat = $params[0].latLng.lat()
+            $scope.user.provider.map_lng = $params[0].latLng.lng()
+
             if angular.isUndefined $scope.locationMarker
               $scope.locationMarker = new google.maps.Marker(
                 map: $scope.locationMap

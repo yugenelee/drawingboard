@@ -1,9 +1,24 @@
 body {
     margin: 0;
     font-family: 'Rokkitt', serif !important;
+    overflow-y: scroll;
 }
 .height-auto{
     height: auto!important;
+}
+
+.push-left{
+    float: left;
+}
+
+.push-right{
+    float: right;
+}
+
+.text-slash{
+    text-decoration: line-through;
+    color: #666;
+    font-size: 70%;
 }
 
 ::-moz-selection {
@@ -32,6 +47,46 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px dotted #ddd;
 }
+
+.button-paypal {
+
+    color: white;
+    background: #0079c1;
+    background: -moz-linear-gradient(center bottom,#0079c1 0,#0079c1 20%,#7cbefd 100%);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0%,#0079c1),color-stop(20%,#0079c1),color-stop(100%,#7cbefd));
+    background: -webkit-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#7cbefd 100%);
+    background: -ms-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#7cbefd 100%);
+    background: -o-linear-gradient(bottom,#0079c1 0,#0079c1 20%,#7cbefd 100%);
+    background: linear-gradient(bottom,#0079c1 0,#0079c1 20%,#7cbefd 100%);
+    text-shadow: 1px -1px 0 #00629c;
+    border: 1px solid #00629c;
+    -webkit-box-shadow: inset 0 1px #4dbeff;
+    -moz-box-shadow: inset 0 1px #4dbeff;
+    box-shadow: inset 0 1px #4dbeff;
+}
+.button-paypal:hover {
+    background-color: #006aa6;
+    background: -moz-linear-gradient(center bottom,#006aa6 0,#006aa6 20%,#7cbefd 100%);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0%,#006aa6),color-stop(20%,#006aa6),color-stop(100%,#7cbefd));
+    background: -webkit-linear-gradient(bottom,#006aa6 0,#006aa6 20%,#7cbefd 100%);
+    background: -ms-linear-gradient(bottom,#006aa6 0,#006aa6 20%,#7cbefd 100%);
+    background: -o-linear-gradient(bottom,#006aa6 0,#006aa6 20%,#7cbefd 100%);
+    background: linear-gradient(bottom,#006aa6 0,#006aa6 20%,#7cbefd 100%);
+    color: white;
+}
+.button-paypal:active {
+    -webkit-box-shadow: inset 0 0 10px #006096;
+    -moz-box-shadow: inset 0 0 10px #006096;
+    box-shadow: inset 0 0 10px #006096;
+}
+.paypal-btn img {
+    width: 72px;
+    position: relative;
+    top: 1px;
+    margin-left: 2px;
+}
+
+
 /* header
 ---------------------------------------------------------------------- */
 .header-browse-icon {
@@ -42,7 +97,8 @@ body {
 .logo-div {
 }
 .logo-div img {
-    width: 82%;
+    max-width: 100%;
+    display: block;
 }
 /* browse
 ---------------------------------------------------------------------- */
@@ -80,6 +136,15 @@ p {
 span {
     color: #f66201;
 }
+.orange1{
+    color: #f66201;
+}
+
+.orange1:hover{
+    color: #f66201;
+
+}
+
 strong {
     font-size: 17px;
     color: #373435;
@@ -94,7 +159,7 @@ strong {
     position: relative;
 }
 #top-nav {
-    width: 940px;
+    max-width: 940px;
     margin: 0 auto;
     position: relative;
     padding: 10px 0px;
@@ -121,6 +186,7 @@ strong {
 .main-container {
     background-color: #f6f6f6;
     padding: 40px 0px;
+    min-height: 240px;
 }
 #main-content {
     /*margin-top: 40px;
@@ -132,7 +198,7 @@ strong {
     background-color: #ffffff;
 }
 .sidebar .nav {
-    margin: 20px 0 20px 20px;
+    margin: 10px 20px;
     border-right: 2px solid #e1e1e1;
 }
 .sidebar .nav-header {
@@ -165,7 +231,7 @@ strong {
     margin-bottom: 20px;
 }
 .content-main {
-    padding: 20px 20px 0px 0px;
+    padding: 20px 5px;
 }
 .content-main i {
     color: #b0b0b0;
@@ -212,7 +278,7 @@ form label {
     font-size: 12px;
 }
 #event-sup, #why-draw, #footer-content, .copyright-div .copyright-wrapper {
-    width: 940px;
+    max-width: 940px;
     margin: 0 auto;
 }
 #howto .span3 span {
@@ -327,7 +393,7 @@ form label {
 }
 .pricing-table .title {
     color: #ffffff;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     padding: 15px;
     text-align: center;
@@ -345,7 +411,7 @@ form label {
 }
 .pricing-table .price {
     position: relative;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     background-color: #ecf0f1;
     padding: 15px;
@@ -358,8 +424,8 @@ form label {
     color: #77939a;
 }
 .pricing-table .price strong {
-    font-size: 30px;
-    line-height: 44px;
+    font-size: 16px;
+    line-height: 19px;
     display: inline-block;
 }
 .pricing-table .price sup {
@@ -369,7 +435,7 @@ form label {
 .pricing-table .price em {
     position: relative;
     bottom: -2px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: normal;
     color: #a3b6bb;
 }
@@ -411,9 +477,8 @@ form label {
     background-color: #ffffff;
     padding: 10px 10px;
     border-bottom: 1px solid #ecf0f1;
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
-    height: 21px;
 }
 
 .pricing-table ul li .icon-ok{
@@ -443,9 +508,8 @@ form label {
     transition: all 0.3s ease-in-out;
 }
 .pricing-table .price-free {
-    font-size: 26px;
-    line-height: 44px;
-
+    font-size: 16px;
+    line-height: 21px;
 }
 
 .belize-hole .title, .belize-hole .alt .title, .belize-hole .alt-dark .title {
@@ -487,9 +551,8 @@ form label {
     color: #666;
 }
 .pricing-table-intro-col ul{
-    margin-top: 83px;
+    margin-top: 101px;
 }
-
 
 .pricing-table-intro-col ul li{
     text-align: left;
@@ -503,4 +566,203 @@ form label {
 }
 .pricing-table .note{
     color: #888;
+}
+
+/*add-ons*/
+.nav.nav-pills > li:nth-last-child(1) {
+    margin-top: -9px;
+}
+.nav.nav-pills > li{
+    float: none;
+    display: inline-block;
+}
+.nav.nav-pills{
+    float: right;
+}
+.container{
+    max-width: 940px;
+}
+.browse-struct {
+    border-top: 1px solid #DDDDDD !important;
+    margin-left: 0 !important;
+    padding: 20px 0;
+}
+input{
+    width: 90%;
+    margin-bottom: 10px !important;
+}
+.table-scale{
+    overflow: auto;
+    max-width:100%;
+}
+.controls > input {
+    max-width: 90%;
+}
+.controls.cancel-left{
+    margin-left: 0;
+}
+.btn.btn-file {
+    width: 90%;
+}
+#main-content > .row-fluid > .span12 > .row-fluid > .span8{
+    margin-left: 0 !important;
+}
+sub, sup {
+    font-size: 65%;
+}
+.uniqueli{
+    background: none repeat scroll 0 0 #F66200 !important;
+    color: #FFFFFF !important;
+}
+.span4.pricing-table.pricing-table-intro-col.belize-hole.bordered li {
+    line-height: 24px;
+}
+.centext{
+    text-align:center;
+}
+.span3.pricing-table.belize-hole.bordered span {
+    display: none;
+}
+
+.tinynav { display: none }
+.span4.sidebar {
+    padding: 20px 5px 0;
+}
+.tinynav.tinynav1 {
+    width: 100%;
+}
+.btn.fileupload-exists {
+    margin-top: 20px;
+}
+.span4.sidebar h3{
+    display: none;
+}
+@media(max-width: 980px){
+    #footer *{
+        float: none !important;
+    }
+    #footer .span3, #footer .span6, #footer .span4, #footer .span2{
+        width: 100%;
+    }
+    #footer-content {
+        text-indent: 40px;
+    }
+    #footer-content .span2 > img:nth-child(2) {
+        margin-left: 40px !important;
+    }
+    li.title {
+        font-size: 14px !important;
+    }
+    .span3.pricing-table.belize-hole.bordered span {
+        display: block;
+    }
+    .pricing-table-intro-col ul {
+        display: none;
+    }
+    .pricing-table-div .row-fluid .span3 {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .pricing-table-div {
+        margin-top: -30px;
+    }
+    .uniqueli-in{
+        background: none repeat scroll 0 0 #fcc9a8 !important;
+    }
+}
+@media(max-width: 880px){
+    #top-nav .top-nav-bar li a {
+        font-size: 16px;
+    }
+    .nav.nav-pills {
+        margin-left: 5px;
+    }
+}
+@media(max-width: 767px){
+    .nav.nav-pills{
+        float: none;
+        margin: 0 auto;
+        text-align: center;
+        display:block;
+    }
+    .nav.nav-pills a{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .logo-div img {
+        margin: 0 auto;
+    }
+    #home-content .span3 img{
+        margin-bottom: 10px;
+        width: 60%;
+    }
+    .thumbnails{
+        margin-bottom: 20px;
+    }
+    .pagination.pull-right {
+        display: block;
+        float: none;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .rn-add, .fp-add{
+        float: left !important;
+        width: 50% !important;
+    }
+    .pricing-table-intro-col ul {
+        margin-top: 0;
+    }
+    .tinynav { display: block }
+    #nav { display: none }
+    .sidebar .btn {
+        margin: 0;
+        text-align: center;
+        display: block;
+    }
+    .content-main{
+        padding-top: 0;
+    }
+    body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .listing-items .span3 {
+        display: block !important;
+        float: left !important;
+        margin-bottom: 20px !important;
+        padding: 0 10px !important;
+        text-align: center !important;
+        width: 50% !important;
+    }
+    .listing-items .span3 img{
+        width: 100% !important;
+    }
+    .span4.sidebar h3{
+        display: block;
+    }
+}
+@media(max-width:400px){
+    .btn {
+        padding: 5px;
+    }
+    .btn-group > .btn, .btn-group > .dropdown-menu, .btn-group > .popover {
+        font-size: 11px;
+    }
+    .rn-add, .fp-add{
+        text-align: left !important;
+        float: none !important;
+        width: 100% !important;
+    }
+    .span4.text-right.rn-add {
+        margin-bottom: 20px;
+    }
+    .listing-items .span3 {
+        display: block !important;
+        float: left !important;
+        margin-bottom: 20px !important;
+        padding: 0 10px !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
 }

@@ -14,7 +14,15 @@ angular.module('dashboard').directive 'listingForm', [
       'FormHandler'
       'Provider'
       'Service'
-      ($scope, $rootScope, $routeParams, FormHandler, Entity, Service) ->
+      '$location'
+      'Priceplan'
+      'MemoryStore'
+      ($scope, $rootScope, $routeParams, FormHandler, Entity, Service, $location, Priceplan, MemoryStore) ->
+
+        pricingplan = MemoryStore.get('pricingplan')
+
+        if not pricingplan
+          $location.path 'account.pricing'
 
         geocoder = new google.maps.Geocoder()
 
@@ -24,17 +32,22 @@ angular.module('dashboard').directive 'listingForm', [
             if $scope.form.$valid
               $rootScope.clear_notifications()
 
-              switch $scope.type
-                when 'new'
-                  promise = Entity.create $scope.form_object, notify_success: false
-                  success_msg = 'Listing has been submitted'
-                when 'edit'
-                  promise = $scope.form_object.put()
-                  success_msg = 'Your listing is updated successfully'
-              promise.then ((object)->
-                $rootScope.redirect_to "dashboard.vendor.listing" ,success: success_msg
-              ), ->
-                $rootScope.notify_error 'Form has missing or invalid values'
+              planSelector =
+                conditions:
+                  code: pricingplan
+              Priceplan.all(planSelector).then (res) ->
+                $scope.form_object.priceplan_id = res[0].id
+                switch $scope.type
+                  when 'new'
+                    promise = Entity.create $scope.form_object, notify_success: false
+                    success_msg = 'Listing has been submitted'
+                  when 'edit'
+                    promise = $scope.form_object.put()
+                    success_msg = 'Your listing is updated successfully'
+                promise.then ((object)->
+                  $rootScope.redirect_to "dashboard.vendor.listing" ,success: success_msg
+                ), ->
+                  $rootScope.notify_error 'Form has missing or invalid values'
             else
               FormHandler.validate $scope.form.$error
           else

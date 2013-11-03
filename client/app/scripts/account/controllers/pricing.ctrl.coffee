@@ -6,14 +6,22 @@ angular.module('account').controller 'AccountPricingCtrl', [
 
     $scope.basicPlan = ->
       MemoryStore.set('pricingplan', 'basic')
-      $location.path 'register.vendor'
+      if $scope.authenticated
+        $location.path('listing.new')
+      else
+        $location.path 'register.vendor'
 
     $scope.basicPlusPlan = ->
-      MemoryStore.set('pricingplan', 'basicPlus')
-      $location.path 'register.vendor'
+      MemoryStore.set('pricingplan', 'basicplus')
+      if $scope.authenticated
+        $location.path('listing.new')
+      else
+        $location.path 'register.vendor'
 
     $scope.premiumPlan = ->
       MemoryStore.set('pricingplan', 'premium')
-      $location.path 'register.vendor'
-
+      if $scope.authenticated
+        $location.path('listing.new')
+      else
+        $location.path 'register.vendor'
 ]

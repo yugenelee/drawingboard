@@ -3,18 +3,19 @@ class Provider
   include Mongoid::Timestamps
   include Includable::Serializer
 
+  PENDING_PAYMENT = 'Pending Payment'
   PENDING_APPROVAL = 'Pending Approval'
   APPROVED = 'Approved'
 
   field :name
-  field :address
   field :map_address
   field :map_lat
   field :map_lng
+  field :expiry, type: Date
   field :browse_description
   field :profile_description
   field :overall_rating, default: 0
-  field :status, default: PENDING_APPROVAL
+  field :status, default: PENDING_PAYMENT
   #field :status, default: APPROVED
 
   belongs_to :vendor
