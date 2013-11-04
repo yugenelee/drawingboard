@@ -1,3 +1,17 @@
+class ModelErrorProcessor
+  constructor: (@response, @$rootScope) ->
+
+  process: ->
+    switch @response.status
+      when 422 # unprocessable entity
+        for field, error_list of @response.data
+          for error in error_list
+            @$rootScope.notify_error "#{field} #{error}"
+      when 400 # not found
+        @$rootScope.notify_error "Resource not found"
+      when 401
+        @$rootScope.notify_error "You do not have the permission to modify resource"
+
 class BaseModel
   constructor: (@Restangular, @$rootScope, @$filter, @singularName, @pluralName) ->
     @humanizedSingularName = @$filter('inflector')(@singularName, 'humanize')
@@ -21,14 +35,19 @@ class BaseModel
       opts =
         notify_success: true
         notify_error: true
+        process_error: false
       opts.notify_success = options.notify_success if options.notify_success?
       opts.notify_error = options.notify_error if options.notify_error?
+      opts.process_error = options.process_error if options.process_error?
       promise.then ((item)=>
         @operation_success {item}
         @$rootScope.notify_success "#{@humanizedSingularName} created successfully" if opts.notify_success
+        @$rootScope.redirect_to(options.redirect_to) if options.redirect_to?
         item
       ), (response) =>
         @operation_failed {response, model, options}
+        proc = new ModelErrorProcessor(response, @$rootScope)
+        proc.process() if opts.process_error
         @$rootScope.notify_error "Failed to create #{@humanizedSingularName}" if opts.notify_error
         console.log '@create error: '
         console.log response

@@ -6,6 +6,7 @@ angular.module('common').provider 'Warden', ->
     simplify: (routeProvider) ->
       @routeProvider = routeProvider
       @requireUser = false
+      @requireAdmin = false
       @omitView = false
       @omitController = false
       return @
@@ -18,6 +19,10 @@ angular.module('common').provider 'Warden', ->
 
     require_user: ->
       @requireUser = true
+      return @
+
+    require_admin: ->
+      @requireAdmin = true
       return @
 
     omit_view: ->
@@ -43,9 +48,11 @@ angular.module('common').provider 'Warden', ->
 
       resolves = {}
       options.user = @requireUser unless options.user?
+      options.admin = @requireAdmin unless options.admin?
       options.omitView = @omitView unless options.omitView?
       options.omitController = @omitController unless options.omitController?
       resolves.current_user = resolvables['current_user'] if options.user
+      resolves.admin = resolvables['admin'] if options.admin
       if options.resolves?
         resolves[resolve] = resolvables[resolve] for resolve in options.resolves
       if options.omitView

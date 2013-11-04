@@ -16,7 +16,7 @@ module Api
         get 'paypal_link' do
           begin
             ip_address = request.ip.to_s
-            PaymentServices::Activities.paypal_link(params[:provider_id], params[:priceplan_id], ip_address, params[:pp_return_url], params[:pp_cancel_url])
+            PaymentServices::Activities.paypal_link(params[:provider_id], params[:priceplan_id], params[:discount_code], ip_address, params[:pp_return_url], params[:pp_cancel_url])
           rescue PaymentServices::Exceptions::Exception => e
             handle_error e, params, 404
           end

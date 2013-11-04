@@ -5,11 +5,25 @@ module PaymentServices
 
     class << self
 
-      def paypal_link(provider_id, priceplan_id, remote_ip, pp_return_url, pp_cancel_url)
+      def is_valid_discount_code(discount_code)
+        discount = Discount.where(code: discount_code)
+        discount = discount.empty?? nil : discount.first
+        raise! DISCOUNT_CODE_NOT_FOUND if discount.nil?
+        raise! DISCOUNT_CODE_EXPIRED if discount.suspended?
+        discount
+      end
+
+      def paypal_link(provider_id, priceplan_id, discount_code, remote_ip, pp_return_url, pp_cancel_url)
         priceplan = priceplan(priceplan_id)
+        begin
+          discount = 100 - discount_from_code(discount_code).percentage
+        rescue
+          discount = 100
+        end
+        cents = (discount * priceplan.price).to_i
         payment = Payment.create! provider_id: provider_id,
                                   priceplan_id: priceplan_id,
-                                  cents: (priceplan.price * 100).to_i,
+                                  cents: cents,
                                   purpose: Payment::NEW_PLAN,
                                   ip_address: remote_ip,
                                   status: Payment::PAYMENT_PENDING

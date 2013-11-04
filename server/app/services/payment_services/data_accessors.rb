@@ -13,6 +13,12 @@ module PaymentServices
       priceplan.first
     end
 
+    def discount_from_code(code)
+      discount = Discount.where(code: code)
+      raise! DISCOUNT_NOT_FOUND if discount.blank?
+      discount.first
+    end
+
     def payment_from_token(pp_token)
       payment = Payment.where(pp_token: pp_token)
       raise! PAYMENT_NOT_FOUND if payment.blank?
