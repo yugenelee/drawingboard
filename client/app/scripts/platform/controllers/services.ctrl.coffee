@@ -8,6 +8,8 @@ angular.module('platform').controller 'ServicesCtrl', [
   ($scope, service, $modal, Cart, $location, Provider) ->
     $scope.service = service
 
+    $scope.requestsInCart = Cart.getRequestKeys()
+
     $scope.goToDetailsPage = (provider_id)->
       $location.path "provider/#{ provider_id }/#{ service.name }"
 
@@ -25,15 +27,21 @@ angular.module('platform').controller 'ServicesCtrl', [
       ), ->
         $scope.notify_error 'Unable to fetch result from server'
 
+    $scope.requestQuote = (provider)->
+      if $scope.user_type != 'vendor'
+        Cart.add service.display_name, provider
+        $scope.notify_success 'Request added to your cart.'
+      else
+        $scope.notify_info 'Vendor cannot request quotes from other vendors.'
+
     init = ->
       $scope.query =
         order: 'created_at DESC'
         page: 1
         per_page: 5
-        any_in:
-          service_ids: [service.id]
         conditions:
           status: 'Approved'
+          service_id: service.id
       $scope.$watch 'query', (new_value, old_value, scope) ->
         if new_value.page == old_value.page
           scope.query.page = 1

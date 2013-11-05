@@ -15,6 +15,7 @@ angular.module('platform').controller 'ProviderCtrl', [
 
     $scope.provider = provider
     $scope.service = service
+    $scope.requestsInCart = Cart.getRequestKeys()
     $scope.reviewFormOpened = false
     $scope.provider_pictures_pairs = []
     i = 0
@@ -68,25 +69,10 @@ angular.module('platform').controller 'ProviderCtrl', [
               $modalInstance.close()
         ]
 
-    $scope.openQuoteDialog = ->
+    $scope.requestQuote = ->
       if $scope.user_type != 'vendor'
-        $modal.open
-          templateUrl: 'dialogs/choose_services.dialog.html'
-          windowClass: 'modal'
-          controller: [
-            '$scope'
-            '$modalInstance'
-            ($scope, $modalInstance) ->
-              $scope.services = provider.services
-              $scope.selected_services = {}
-              $scope.cancel = ->
-                $modalInstance.close()
-              $scope.confirm = ->
-                angular.forEach $scope.selected_services, (checked, service) ->
-                  Cart.add service, provider if checked
-                  $scope.notify_success 'Service(s) have been added to your cart'
-                $modalInstance.close()
-          ]
+        Cart.add service.display_name, provider
+        $scope.notify_success 'Request added to your cart.'
       else
         $scope.notify_info 'Vendor cannot request quotes from other vendors.'
 
