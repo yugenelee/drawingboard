@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
   default from: "admin@drawingboard.com"
 
-  #SiteUrl = 'http://162.243.15.77'
+  SiteUrl = 'http://162.243.15.77'
   AdminEmail = 'felixsagitta@gmail.com'
-  SiteUrl = 'http://localhost:3333'
+  #SiteUrl = 'http://localhost:3333'
 
   def activate_account(user, token)
     @user = User.find user

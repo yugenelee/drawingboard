@@ -3,7 +3,8 @@ class CommonMailer < ActionMailer::Base
 
   #SiteUrl = 'http://felix.creativesatwork.me'
 
-  SiteUrl = 'http://localhost:3333'
+  #SiteUrl = 'http://localhost:3333'
+  SiteUrl = 'http://162.243.15.77'
   #Recipients = 'felixsagitta@gmail.com, contactus@creativesatwork.me'
 
   def contact_us(name_value_hash)
