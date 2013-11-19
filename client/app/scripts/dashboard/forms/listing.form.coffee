@@ -23,6 +23,8 @@ angular.module('dashboard').directive 'listingForm', [
 
         if not pricingplan
           $location.path 'account.pricing'
+        else
+          $scope.pricingplan = pricingplan
 
         geocoder = new google.maps.Geocoder()
 

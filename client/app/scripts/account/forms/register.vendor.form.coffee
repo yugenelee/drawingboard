@@ -20,6 +20,8 @@ angular.module('account').directive 'registerVendorForm', [
 
         if not pricingplan
           $location.path 'account.pricing'
+        else
+          $scope.pricingplan = pricingplan
 
         geocoder = new google.maps.Geocoder()
 

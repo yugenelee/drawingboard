@@ -38,7 +38,7 @@ angular.module('dashboard').directive 'eventForm', [
                   $rootScope.notify_error 'Form has missing or invalid values'
               when 'to_cache'
                 $cookieStore.put 'event_form', $scope.form_object
-                $rootScope.redirect_to 'service_categories', success: 'You can request quotes from vendors for this event.'
+                $rootScope.redirect_to 'services/venues', success: 'You are now ready to start browsing and select vendors for quotes.'
 
           else
             FormHandler.validate $scope.form.$error
