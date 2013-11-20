@@ -43,6 +43,7 @@ class ProviderSerializer < ActiveModel::Serializer
              :browse_description,
              :profile_description,
              :overall_rating,
+             :venue_size,
              :created_at,
              :updated_at,
              :status

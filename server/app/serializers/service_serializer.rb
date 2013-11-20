@@ -7,6 +7,8 @@ class ProviderForServiceSerializer < ActiveModel::Serializer
              :expiry,
              :browse_description,
              :profile_description,
+             :overall_rating,
+             :venue_size,
              :status,
              :created_at,
              :updated_at

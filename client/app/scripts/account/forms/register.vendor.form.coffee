@@ -25,6 +25,13 @@ angular.module('account').directive 'registerVendorForm', [
 
         geocoder = new google.maps.Geocoder()
 
+        $scope.venue_sizes = [
+          '1 - 50'
+          '51 - 150'
+          '151 - 300'
+          '> 300'
+        ]
+
         $scope.submitForm = ->
           if $scope.terms_and_conditions
             $scope.submitted = true
@@ -52,6 +59,7 @@ angular.module('account').directive 'registerVendorForm', [
                   browse_description: $scope.user.provider.browse_description
                   profile_description: $scope.user.provider.profile_description
                   provider_pictures: $scope.user.provider.provider_pictures
+                  venue_size: $scope.user.provider.venue_size
                   service_id: $scope.user.provider.service_id
                   priceplan_id: res[0].id
 

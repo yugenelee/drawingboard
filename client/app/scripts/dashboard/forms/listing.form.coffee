@@ -26,6 +26,13 @@ angular.module('dashboard').directive 'listingForm', [
         else
           $scope.pricingplan = pricingplan
 
+        $scope.venue_sizes = [
+          'All'
+          '1 - 50'
+          '51 - 150'
+          '151 - 300'
+          '> 300'
+        ]
         geocoder = new google.maps.Geocoder()
 
         $scope.submitForm = ->

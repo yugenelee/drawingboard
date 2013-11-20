@@ -15,7 +15,7 @@ angular.module('dashboard').controller 'DashboardPaymentCtrl', [
         $scope.newPrice = (provider.priceplan.price * (100-$scope.discount) / 100).toFixed(2)
 
     $scope.pay = ->
-      alert($scope.discount_code)
+      console.log($scope.discount_code)
       Payment.paypal_link(provider.id, provider.priceplan.id, $scope.discount_code).then (res) ->
         console.log(res)
         if res.status == 'SUCCESS'

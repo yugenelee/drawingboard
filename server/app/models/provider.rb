@@ -16,6 +16,8 @@ class Provider
   field :profile_description
   field :overall_rating, default: 0
   field :status, default: PENDING_PAYMENT
+  field :venue_size
+
   #field :status, default: APPROVED
 
   belongs_to :vendor
